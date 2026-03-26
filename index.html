@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cado - Celebrate Together</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="banner-container">
+
+        <div class="logo-area">
+            <img src="img/logo-cado.png" alt="Cado Logo" class="logo">
+        </div>
+
+        <div class="header-right">
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                <a href="#">
+                    <img src="img/x-twitter-brands-solid-full.svg" alt="X" class="social-svg">
+                </a>
+
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+            </div>
+            <div class="login-area">
+                <a href="login.html" class="btn-login"><i class="fa-solid fa-user"></i> login</a>
+            </div>
+        </div>
+
+        <nav class="banner-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About us</a></li>
+
+                <li>
+                    <a href="create-celebration.html">Create Celebration</a>
+                    <div class="dropdown-menu">
+                        <a href="create-celebration.html">Baby Celebrations</a>
+                        <a href="create-celebration.html">Children's Celebrations</a>
+                        <a href="create-celebration.html">Weddings & partnerships</a>
+                    </div>
+                </li>
+
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+            </ul>
+
+            <div class="search-box" id="searchBox">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+                <button class="btn-search" onclick="toggleSearch()"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </nav>
+        <!-- Mobile hamburger (CSS-only toggle) -->
+        <input type="checkbox" id="hamburger-toggle" class="hamburger-toggle">
+        <label for="hamburger-toggle" class="hamburger-icon" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="nav-overlay" onclick="document.getElementById('hamburger-toggle').checked=false;"></div>
+        <nav class="mobile-nav-drawer">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About us</a>
+            <a href="create-celebration.html">Create Celebration</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="index.html#blog">Blog</a>
+            <a href="login.html" class="mobile-login-btn">Login</a>
+        </nav>
+
+
+
+
+
+        <div class="hero-content" id="banner-home">
+            <h1>Celebrate together.<br>Give with meaning.</h1>
+            <div class="divider"></div>
+            <p>A modern way to celebrate life's special moments<br>
+                – where guests come together to support meaningful<br>
+                gifts, not just buy things.</p>
+
+            <a href="create-celebration.html" class="btn-cta">Create Celebration</a>
+        </div>
+
+    </section>
+
+    <section class="how-it-works-section" id="about">
+
+        <div class="hiw-left">
+            <div class="image-wrapper">
+                <img src="img/Balao.png" alt="Balloon" class="floating-balloon">
+                <img src="img/gift.png" alt="Happy child with gift" class="main-gift-img">
+            </div>
+        </div>
+
+        <div class="hiw-right">
+
+            <div class="section-tag">
+                <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                <span>How it works</span>
+            </div>
+
+            <h2>A simpler way<br>to celebrate.</h2>
+            <div class="title-accent-line"></div>
+
+            <p class="section-desc">
+                Cado was created to make gifting feel warm, human, and intentional again. Instead of traditional gift
+                lists, we help people come together around moments that truly matter.
+            </p>
+
+            <div class="steps-container">
+
+                <div class="step-card">
+                    <div class="step-icon-box">
+                        <img src="img/confetti.svg" alt="Create">
+                    </div>
+                    <div class="step-content">
+                        <h3>Create your celebration</h3>
+                        <p>Choose the type of moment you're celebrating and add a few meaningful gift ideas that reflect
+                            it.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon-box">
+                        <img src="img/send.svg" alt="Share">
+                    </div>
+                    <div class="step-content">
+                        <h3>Share the link</h3>
+                        <p>Invite friends and family with a single link – easy to share, easy to join.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon-box">
+                        <img src="img/gift.svg" alt="Celebrate">
+                    </div>
+                    <div class="step-content">
+                        <h3>Celebrate together</h3>
+                        <p>Guests contribute in their own way, leaving messages and becoming part of something special.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="search-banner-wrapper">
+        <div class="sb-content">
+            <div class="content-limiter">
+                <div class="sb-left">
+                    <h2>Looking for<br>a celebration?</h2>
+                    <div class="yellow-dash-small"></div>
+                </div>
+
+                <div class="sb-right">
+                    <p>Find a celebration you've been invited to and join the moment.</p>
+                    <div class="sb-input-container">
+                        <input type="text" placeholder="Enter the name or link you received.">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="celebration-types-section">
+
+        <div class="limit-celebration">
+            <div class="ct-header">
+                <div class="ct-text-content">
+                    <div class="section-tag">
+                        <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                        <span>Create Celebration</span>
+                    </div>
+                    <h2>Every moment deserves<br>its own way of celebrating.</h2>
+                    <div class="yellow-dash-small"></div>
+                    <p>From first milestones to lifelong commitments, Cado adapts to the meaning of each celebration.
+                    </p>
+                </div>
+                <div class="ct-cta-area">
+                    <a href="create-celebration.html" class="btn-cta-secondary">Create Celebration</a>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+
+                <div class="celebration-card">
+                    <h3>Baby<br>Celebrations</h3>
+
+                    <div class="card-image-box">
+                        <img src="img/card-1.png" alt="Baby" class="card-img">
+                    </div>
+
+                    <p class="card-desc">A gentle way to welcome new beginnings and shared memories.</p>
+
+                    <a href="create-celebration.html" class="btn-card-hover">Create Celebration</a>
+                </div>
+
+                <div class="celebration-card">
+                    <h3>Children’s<br>Celebrations</h3>
+
+                    <div class="card-image-box">
+                        <img src="img/card-2.png" alt="Children" class="card-img">
+                    </div>
+
+                    <p class="card-desc">Turn birthdays into moments of togetherness, learning, and joy.</p>
+
+                    <a href="create-celebration.html" class="btn-card-hover">Create Celebration</a>
+                </div>
+
+                <div class="celebration-card">
+                    <h3>Weddings<br>& partnerships</h3>
+
+                    <div class="card-image-box">
+                        <img src="img/card-3.png" alt="Couple" class="card-img">
+                    </div>
+
+                    <p class="card-desc">Celebrate love with intention, connection, and shared meaning.</p>
+
+                    <a href="create-celebration.html" class="btn-card-hover">Create Celebration</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="limit-celebration">
+            <div class="faq-container">
+
+                <div class="faq-left">
+                    <div class="section-tag">
+                        <div class="section-tag">
+                            <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                            <span>FAQ</span>
+                        </div>
+
+                    </div>
+
+                    <h2>A few things people<br>often wonder.</h2>
+                    <div class="yellow-dash-small"></div>
+
+                    <p>Every celebration is different. These answers help explain how Cado keeps moments simple, calm,
+                        and meaningful — for hosts and guests alike.</p>
+
+                    <button class="btn-cta-secondary btn-faq-custom">See the full FAQ</button>
+                </div>
+
+                <div class="faq-right">
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What makes Cado different from traditional gift lists?</span>
+                            <i class="fa-solid fa-plus icon-toggle"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Cado focuses on meaningful contributions rather than just physical items, allowing guests
+                                to participate in the celebration in a more personal way.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do guests see how much others contribute?</span>
+                            <i class="fa-solid fa-plus icon-toggle"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No.<br>Contributions are private, keeping the focus on the celebration — not the amount.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is Cado easy to use for guests?</span>
+                            <i class="fa-solid fa-plus icon-toggle"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! No account creation is needed for guests. They simply click the link, choose how to
+                                contribute, and leave a message.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bkg-testiminial">
+
+        <section class="testimonials-section" id="testimonials">
+
+            <img src="img/gift-element.png" alt="Gift Surprise" class="floating-gift-3d">
+
+            <div class="limit-celebration">
+
+                <div class="testi-container">
+
+                    <div class="testi-left-wrapper">
+
+                        <div class="img-marry-div">
+                            <img src="img/marry.png" alt="Couple Celebrating" class="marry-img">
+                        </div>
+
+                        <div class="testi-floating-group">
+
+                            <div class="testi-card">
+                                <div class="stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+
+                                <p class="testi-text" id="testiText">
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu
+                                    lectus lobortis condimentum."
+                                </p>
+
+                                <div class="testi-user">
+                                    <img src="https://i.pravatar.cc/150?img=32" alt="User" id="testiAvatar"
+                                        class="user-avatar">
+                                    <div class="user-info">
+                                        <h4 id="testiName">Jane Doe</h4>
+                                        <span id="testiRole">Weddings & Partnership</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testi-nav-buttons">
+                                <button class="nav-btn prev-btn" onclick="prevTestimonial()">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </button>
+                                <button class="nav-btn next-btn" onclick="nextTestimonial()">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="testi-right-content">
+                        <div class="section-tag">
+                            <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                            <span>Testimonials</span>
+                        </div>
+
+                        <h2>Moments shared,<br>memories made.</h2>
+                        <div class="yellow-dash-small"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+    </section>
+    </div>
+
+    <section class="blog-section" id="blog">
+        <div class="limit-celebration">
+
+            <div class="blog-header">
+                <div class="blog-header-left">
+                    <div class="section-tag">
+                        <div class="section-tag">
+                            <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                            <span>Blog</span>
+                        </div>
+                    </div>
+                    <h2>Stories, ideas, and<br>thoughtful celebrations.</h2>
+                    <div class="yellow-dash-small"></div>
+                </div>
+
+                <div class="blog-header-right">
+                    <button class="btn-cta-secondary">See all the posts</button>
+                </div>
+            </div>
+
+            <div class="blog-grid">
+
+                <article class="blog-card featured-card">
+                    <img src="img/blog-card-1.png" alt="Children party" class="bg-img-featured">
+
+                    <div class="overlay-gradient"></div>
+
+                    <div class="blog-content-overlay">
+                        <span class="blog-category text-white">Children's celebrations</span>
+                        <span class="blog-date text-white-op">Jan 20, 2026 • No Comments</span>
+
+                        <h3 class="text-white">How to plan a fun birthday without overspending</h3>
+
+                        <a href="#" class="btn-read-more">
+                            Read More <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card standard-card">
+                    <div class="blog-img-box">
+                        <img src="img/blog-card-2.png" alt="Kids playing" class="blog-img-std">
+                    </div>
+                    <div class="blog-content-std">
+                        <span class="blog-category">Children's celebrations</span>
+                        <span class="blog-date">Jan 20, 2026 • No Comments</span>
+
+                        <h3>How to plan a fun birthday without overspending</h3>
+
+                        <a href="#" class="btn-read-more">
+                            Read More <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card standard-card">
+                    <div class="blog-img-box">
+                        <img src="img/blog-card-3.png" alt="Birthday cake" class="blog-img-std">
+                    </div>
+                    <div class="blog-content-std">
+                        <span class="blog-category">Children's celebrations</span>
+                        <span class="blog-date">Jan 20, 2026 • No Comments</span>
+
+                        <h3>How to plan a fun birthday without overspending</h3>
+
+                        <a href="#" class="btn-read-more">
+                            Read More <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+
+        <div class="newsletter-card" id="newsletter">
+            <div class="content-limiter">
+                <div class="news-left">
+                    <div class="section-tag">
+                        <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                        <span>Newsletter</span>
+                    </div>
+                    <h3>Stay close to<br>meaningful moments.</h3>
+                    <div class="yellow-dash-small"></div>
+                </div>
+
+                <div class="news-right">
+                    <p>Get gentle inspiration, celebration ideas, and stories about meaningful giving – delivered
+                        occasionally, always thoughtfully.</p>
+
+                    <form class="news-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Stay in touch</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-orange-bg">
+            <div class="limit-celebration footer-content-wrapper">
+
+                <div class="footer-logo-area">
+                    <img src="img/logo-cado.png" alt="Cado Logo White" class="footer-logo">
+                </div>
+
+                <div class="footer-nav-row">
+                    <nav class="footer-menu">
+                        <a href="index.html">Home</a>
+                        <a href="#about">About us</a>
+                        <a href="create-celebration.html">Create Celebration</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#testimonials">Testimonials</a>
+                        <a href="#blog">Blog</a>
+                        <a href="#newsletter">Newsletter</a>
+                    </nav>
+
+                    <div class="footer-actions">
+                        <button class="search-btn-footer"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                        <div class="social-row">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#">
+                                <img src="img/x-twitter-brands-solid-full.svg" alt="X" class="social-svg">
+                            </a>
+                            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Use and Service</a>
+                </div>
+
+            </div>
+
+            <div class="developer-bar">
+                <div class="dev-content">
+
+                    <a target="_blank" href="https://incandescente.com.br/"><img
+                            src="img/developed-by-incandescente.png" alt="Incandescente" class="dev-logo"></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <script src="script.js"></script>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

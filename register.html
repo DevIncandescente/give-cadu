@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Cado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-container">
+        <div class="auth-visual register-bg">
+            <div class="auth-overlay">
+                <h2>Join the Party!</h2>
+                <p>Create meaningful celebrations and<br>share joy with your loved ones.</p>
+            </div>
+        </div>
+
+        <div class="auth-form-side">
+            <div class="auth-logo">
+                <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo"></a>
+            </div>
+
+            <div class="auth-header">
+                <h1>Sign Up</h1>
+                <p>Please enter your details to create your account.</p>
+            </div>
+
+            <form class="auth-form">
+
+                <div class="input-wrapper">
+                    <label>Full Name</label>
+                    <div class="input-icon-group">
+                        <i class="fa-regular fa-user icon-left"></i>
+                        <input type="text" class="modal-input padded-left" placeholder="Your Name">
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Email Address</label>
+                    <div class="input-icon-group">
+                        <i class="fa-regular fa-envelope icon-left"></i>
+                        <input type="email" class="modal-input padded-left" placeholder="name@example.com">
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Password</label>
+                    <div class="input-icon-group">
+                        <i class="fa-solid fa-lock icon-left"></i>
+                        <input type="password" class="modal-input padded-left password-field"
+                            placeholder="Enter your password">
+                        <i class="fa-regular fa-eye icon-right toggle-password"></i>
+                    </div>
+                </div>
+
+                <div class="auth-actions">
+                    <label class="custom-checkbox terms">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#">Terms & Conditions</a>
+                    </label>
+                </div>
+
+                <button type="button" class="btn-auth-submit" onclick="window.location.href='admin.html'">Sign
+                    Up</button>
+
+                <div class="auth-divider">
+                    <span>Or continue with</span>
+                </div>
+
+                <div class="social-auth-row">
+                    <button type="button" class="social-btn google">
+                        <i class="fa-brands fa-google"></i>
+                    </button>
+                    <button type="button" class="social-btn facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </button>
+                    <button type="button" class="social-btn apple">
+                        <i class="fa-brands fa-apple"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

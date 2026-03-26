@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Celebration - Cado</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="banner-container internal-mode">
+
+       <input type="checkbox" id="mobile-menu-toggle" class="hamburger-toggle">
+        
+        <label for="mobile-menu-toggle" class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav class="mobile-nav-drawer">
+            <a href="index.html">Home</a>
+            <a href="admin.html">Edit Celebration</a>
+            <a href="guestlist.html">Guest List</a>
+            <a href="messages.html">Messages</a>
+            <a href="#" id="shareBtnMobile">Share Celebration</a>
+            
+            <a href="statement.html" class="mobile-login-btn">
+                <i class="fa-solid fa-database"></i> Gift Statement
+            </a>
+            
+            <a href="index.html" style="margin-top: auto; color: #E36A4B;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </nav>
+
+        <div class="nav-overlay"></div>
+
+
+        <div class="logo-area">
+            <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo" class="logo"></a>
+        </div>
+
+        <div class="header-right">
+            <div class="login-area">
+                <a href="admin.html" class="btn-login"><i class="fa-solid fa-user"></i> My panel</a>
+            </div>
+        </div>
+
+        <nav class="banner-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="#" id="shareBtn">Share Celebration</a></li>
+                <li class="cc-highlight">
+                    <a href="statement.html"><i class="fa-solid fa-database"></i> Gift Statement</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="canvas-split-container">
+
+            <!-- LEFT: Interaction Zone (Form) -->
+            <div class="interaction-zone">
+                <form class="creation-form">
+
+                    <div class="form-step-card animate-reveal">
+                        <h2 class="step-title">Event Type</h2>
+                        <div class="type-selection-grid">
+
+                            <label class="type-card">
+                                <input type="radio" name="event_type" value="baby" data-label="Baby Celebrations">
+                                <span class="card-content">
+                                    <div class="card-image-box">
+                                        <img src="img/card-1.png" alt="Baby" class="card-img">
+                                    </div>
+                                    <i class="fa-solid fa-baby-carriage"></i>
+                                    <span>Baby Celebrations</span>
+                                </span>
+                            </label>
+
+                            <label class="type-card">
+                                <input type="radio" name="event_type" value="kids" checked
+                                    data-label="Children’s Celebrations">
+                                <span class="card-content">
+                                    <div class="card-image-box">
+                                        <img src="img/card-2.png" alt="Children" class="card-img">
+                                    </div>
+                                    <i class="fa-solid fa-shapes"></i>
+                                    <span>Children’s Celebrations</span>
+                                </span>
+                            </label>
+
+                            <label class="type-card">
+                                <input type="radio" name="event_type" value="wedding"
+                                    data-label="Weddings & partnerships">
+                                <span class="card-content">
+                                    <div class="card-image-box">
+                                        <img src="img/card-3.png" alt="Couple" class="card-img">
+                                    </div>
+                                    <i class="fa-solid fa-ring"></i>
+                                    <span>Weddings & partnerships</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-step-card animate-reveal">
+                        <label class="input-label">Event Name</label>
+                        <input type="text" class="cado-input" id="event-name-input"
+                            placeholder="E.g., Mauro's 5th Birthday">
+                    </div>
+
+                    <div class="form-step-card animate-reveal grid-2-col">
+                        <div class="input-group">
+                            <label class="input-label">Banner Image</label>
+                            <div class="upload-box" id="bannerUploadBox">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>Click to upload image</span>
+                                <input type="file" id="bannerInput" hidden accept="image/*">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Event Description / Date / Local</label>
+                            <textarea class="cado-input text-area" id="event-desc-input"
+                                placeholder="Tell your guests about the party details..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-step-card animate-reveal">
+
+                        <div id="fields-single" class="grid-2-col">
+                            <div class="input-group">
+                                <label class="input-label">Celebrant's Name</label>
+                                <input type="text" class="cado-input preview-sync" data-target="preview-name"
+                                    placeholder="Name">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Age</label>
+                                <input type="number" class="cado-input preview-sync" data-target="preview-age"
+                                    placeholder="Age turning">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Gender</label>
+                                <select class="cado-input">
+                                    <option>Select Gender</option>
+                                    <option>Boy</option>
+                                    <option>Girl</option>
+                                    <option>Neutral</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Fun Fact / Theme</label>
+                                <input type="text" class="cado-input preview-sync" data-target="preview-theme"
+                                    placeholder="E.g. Loves Dinosaurs">
+                            </div>
+                        </div>
+
+                        <div id="fields-couple" class="grid-2-col" style="display: none;">
+                            <div class="input-group">
+                                <label class="input-label">Partner 1 Name</label>
+                                <input type="text" class="cado-input" placeholder="First Name">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Partner 2 Name</label>
+                                <input type="text" class="cado-input" placeholder="First Name">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Honeymoon / Goal</label>
+                                <input type="text" class="cado-input" placeholder="E.g. Trip to Bali / New Home">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Couple's Hashtag (Optional)</label>
+                                <input type="text" class="cado-input" placeholder="#SarahAndMike2024">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-step-card animate-reveal gift-marketplace-card">
+
+                        <!-- Header with counter -->
+                        <div class="gm-header">
+                            <div class="gm-title-group">
+                                <h2 class="step-title">Select Gifts</h2>
+                                <p class="gm-subtitle">Choose up to 6 experiences your guests can contribute to</p>
+                            </div>
+                            <div class="gm-counter-badge" id="giftCounter">
+                                <span id="giftCountNum">0</span><span>/6</span>
+                            </div>
+                        </div>
+
+                        <!-- COMO SACAR tip -->
+                        <div class="gm-withdraw-tip">
+                            <span class="tip-badge">TIP</span>
+                            <div class="tip-content">
+                                <strong>COMO SACAR (How to Withdraw)</strong>
+                                After your celebration, all contributions are transferred to your registered bank account within 3 business days. No fees — 100% goes to you.
+                            </div>
+                        </div>
+
+                        <!-- Search + Filter bar -->
+                        <div class="gm-toolbar">
+                            <div class="gm-search-wrap">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="giftSearch" class="gm-search" placeholder="Search gifts...">
+                            </div>
+                        </div>
+
+                        <!-- Category chips -->
+                        <div class="gm-categories" id="giftCategoryBar">
+                            <button type="button" class="gm-chip active" data-cat="all">✨ All</button>
+                            <button type="button" class="gm-chip" data-cat="experiences">🎡 Experiences</button>
+                            <button type="button" class="gm-chip" data-cat="learning">📚 Learning</button>
+                            <button type="button" class="gm-chip" data-cat="toys">🧸 Toys & Fun</button>
+                            <button type="button" class="gm-chip" data-cat="tech">🎮 Tech</button>
+                            <button type="button" class="gm-chip" data-cat="books">🎨 Books & Art</button>
+                            <button type="button" class="gm-chip" data-cat="sports">⚽ Sports</button>
+                            <button type="button" class="gm-chip" data-cat="meaning">💛 Big Meanings</button>
+                        </div>
+
+                        <!-- Gift grid -->
+                        <div class="gm-grid" id="giftGrid">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <!-- Limit warning -->
+                        <div class="gm-limit-notice" id="giftLimitNotice">
+                            <i class="fa-solid fa-circle-info"></i> You've selected 6 gifts — the maximum for your
+                            celebration page!
+                        </div>
+
+                        <!-- Selected tags bar -->
+                        <div class="gm-selected-bar" id="giftSelectedBar" style="display:none;">
+                            <span class="gm-selected-label">Selected:</span>
+                            <div class="gm-selected-tags" id="giftSelectedTags"></div>
+                        </div>
+
+                        <!-- Create custom gift -->
+                        <div class="gm-create-gift-wrap">
+                            <button type="button" class="btn-create-gift" id="openCreateGiftModal">
+                                <i class="fa-solid fa-plus"></i> Create a Gift
+                            </button>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn-create-page">Create My Celebration</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- RIGHT: Live Canvas (Preview) -->
+            <div class="live-canvas-zone">
+                <div class="canvas-sticky-wrapper">
+                    <div class="preview-badge">Live Preview</div>
+                    <div class="live-preview-box" id="livePreviewContainer">
+                        <div class="preview-banner-mock" id="previewBanner">
+                            <div class="preview-overlay"></div>
+                            <div class="preview-text">
+                                <h1 id="previewDisplayName">Mauro's Party</h1>
+                                <p id="previewDisplayDesc">Tell your guests about the party details...</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-mock">
+                            <div class="preview-stat">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                <span id="previewDisplayAge">5</span> years old
+                            </div>
+                            <div class="preview-stat">
+                                <i class="fa-solid fa-star"></i>
+                                <span id="previewDisplayTheme">Dinosaur Theme</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="canvas-hint">Your page updates as you type!</div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer class="site-footer interna-site-footer">
+        <div class="footer-orange-bg">
+            <div class="limit-celebration footer-content-wrapper">
+                <div class="footer-logo-area">
+                    <img src="img/logo-cado.png" alt="Cado Logo White" class="footer-logo">
+                </div>
+                <div class="footer-nav-row">
+                    <nav class="footer-menu">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About us</a>
+                        <a href="create-celebration.html">Create Celebration</a>
+                        <a href="index.html#faq">FAQ</a>
+                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="index.html#blog">Blog</a>
+                        <a href="index.html#newsletter">Newsletter</a>
+                    </nav>
+                </div>
+                <div class="footer-divider"></div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+            <div class="developer-bar">
+                <div class="dev-content">
+                    <a target="_blank" href="https://incandescente.com.br/"><img
+                            src="img/developed-by-incandescente.png" alt="Incandescente" class="dev-logo"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal: Create Gift -->
+    <div id="createGiftModal" class="modal-overlay create-gift-modal">
+        <div class="modal-box">
+            <button class="close-modal-btn close-create-gift-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Create a Gift</h2>
+                <p>Add a custom gift your guests can contribute to</p>
+            </div>
+
+            <!-- Simple / Complex toggle -->
+            <div class="gift-type-toggle">
+                <button type="button" class="gift-type-btn active" data-type="simple">
+                    <i class="fa-solid fa-bolt"></i> Simple
+                </button>
+                <button type="button" class="gift-type-btn" data-type="complex">
+                    <i class="fa-solid fa-image"></i> With Photos & Details
+                </button>
+            </div>
+
+            <!-- Simple form -->
+            <div id="simpleGiftForm" class="create-gift-form">
+                <div class="input-group">
+                    <label class="input-label">Gift Name</label>
+                    <input type="text" class="cado-input" id="customGiftName" placeholder="E.g., Bicycle Fund">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Category</label>
+                    <select class="cado-input" id="customGiftCategory">
+                        <option value="experiences">🎡 Experiences</option>
+                        <option value="learning">📚 Learning</option>
+                        <option value="toys">🧸 Toys & Fun</option>
+                        <option value="tech">🎮 Tech</option>
+                        <option value="books">🎨 Books & Art</option>
+                        <option value="sports">⚽ Sports</option>
+                        <option value="meaning">💛 Big Meanings</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-add-gift" id="addSimpleGift">
+                    <i class="fa-solid fa-check"></i> Add Gift
+                </button>
+            </div>
+
+            <!-- Complex form (hidden by default) -->
+            <div id="complexGiftForm" class="create-gift-form" style="display:none;">
+                <div class="input-group">
+                    <label class="input-label">Gift Name</label>
+                    <input type="text" class="cado-input" id="customGiftNameComplex" placeholder="E.g., Dream Bicycle">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Description</label>
+                    <textarea class="cado-input text-area" id="customGiftDesc" placeholder="Tell your guests about this gift..." style="min-height:80px;"></textarea>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Photos (up to 3)</label>
+                    <div class="create-gift-photos">
+                        <label class="photo-upload-slot">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Add photo</span>
+                            <input type="file" accept="image/*" hidden>
+                        </label>
+                        <label class="photo-upload-slot">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Add photo</span>
+                            <input type="file" accept="image/*" hidden>
+                        </label>
+                        <label class="photo-upload-slot">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Add photo</span>
+                            <input type="file" accept="image/*" hidden>
+                        </label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Category</label>
+                    <select class="cado-input" id="customGiftCategoryComplex">
+                        <option value="experiences">🎡 Experiences</option>
+                        <option value="learning">📚 Learning</option>
+                        <option value="toys">🧸 Toys & Fun</option>
+                        <option value="tech">🎮 Tech</option>
+                        <option value="books">🎨 Books & Art</option>
+                        <option value="sports">⚽ Sports</option>
+                        <option value="meaning">💛 Big Meanings</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-add-gift" id="addComplexGift">
+                    <i class="fa-solid fa-check"></i> Add Gift
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Modal: Share Celebration -->
+    <div id="shareModal" class="modal-overlay">
+        <div class="modal-box share-modal-box">
+            <button class="close-modal-btn close-share-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Share Celebration</h2>
+                <p>Invite your friends and family to join the celebration!</p>
+            </div>
+            <div class="share-options-grid">
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn facebook">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
+                <a href="#" class="share-option-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                    target="_blank" class="share-option-btn twitter">
+                    <i class="fa-brands fa-x-twitter"></i> Twitter
+                </a>
+            </div>
+            <div class="copy-link-area">
+                <label>Celebration Link</label>
+                <div class="copy-input-group">
+                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

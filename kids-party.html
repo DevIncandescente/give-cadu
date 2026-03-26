@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mauro's Party - Cado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="banner-container internal-mode">
+
+        <div class="logo-area">
+            <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo" class="logo"></a>
+        </div>
+
+        <div class="header-right">
+            <div class="login-area">
+                <a href="admin.html" class="btn-login"><i class="fa-solid fa-user"></i> My Panel</a>
+            </div>
+        </div>
+
+        <nav class="banner-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="#" id="shareBtn">Share Celebration</a></li>
+                <li class="cc-highlight" style="margin-left: 3px;"><a href="statement.html"><i
+                            class="fa-solid fa-database "></i> Gift Statement</a></li>
+            </ul>
+
+        </nav>
+        <!-- Mobile hamburger (CSS-only toggle) -->
+        <input type="checkbox" id="hamburger-toggle" class="hamburger-toggle">
+        <label for="hamburger-toggle" class="hamburger-icon" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="nav-overlay" onclick="document.getElementById('hamburger-toggle').checked=false;"></div>
+        <nav class="mobile-nav-drawer">
+            <a href="index.html">Home</a>
+            <a href="admin.html">Edit Celebration</a>
+            <a href="guestlist.html">Guest List</a>
+            <a href="messages.html">Messages</a>
+            <a href="statement.html">Gift Statement</a>
+            <a href="admin.html" class="mobile-login-btn">My Panel</a>
+        </nav>
+
+
+
+
+
+        <div class="kids-party-wrapper">
+
+            <div class="party-header-text">
+                <h1>Welcome to <span>Mauro's</span> party!</h1>
+                <div class="divider-center"></div>
+            </div>
+
+            <div class="party-content-grid">
+
+                <div class="party-photo-box">
+                    <img src="/img/kids-img-1.png" alt="Mauro and Mom" class="party-main-img">
+                </div>
+
+                <div class="party-info-card">
+                    <p class="party-description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+
+                    <div class="party-details-row">
+                        <div class="detail-item">
+                            <i class="fa-regular fa-calendar text-orange"></i>
+                            <span>September 23, 2026</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-regular fa-clock text-orange"></i>
+                            <span>4h - 13h</span>
+                        </div>
+                    </div>
+
+                    <div class="party-location">
+                        <i class="fa-solid fa-location-dot text-orange"></i>
+                        <div>
+                            <strong>Kids Buffet</strong><br>
+                            Berkeley Gate, 22 Berkeley Square, London W1J 6EF
+                        </div>
+                    </div>
+
+                    <div class="countdown-area">
+                        <div class="timer-boxes">
+                            <div class="time-box">0</div>
+                            <div class="time-box">9</div>
+                            <div class="time-box">7</div>
+                        </div>
+                        <div class="timer-text">
+                            <strong>Days until</strong><br>the celebration
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+    <section class="kids-gifts-section">
+
+        <img src="img/gift-element.png" alt="Floating Gift" class="gift-3d-floating">
+
+        <div class="limit-celebration">
+
+            <div class="attendance-cta-box">
+                <div class="attendance-left">
+                    <h2>You’re part of this celebration!</h2>
+                    <div class="divider-left"></div>
+                    <p>Your presence makes this moment even more meaningful.</p>
+                </div>
+
+                <div class="attendance-right">
+                    <div class="cta-decoration">
+                        <img src="img/bkg-cta-kids.png" alt="Decoration" class="cta-bg-icon">
+                    </div>
+
+                    <div class="cta-actions">
+                        <button type="button" class="btn-confirm-presence">Confirm your presence</button>
+
+                        <span class="cta-note">Please confirm your attendance<br>by September 15, 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gifts-content-area">
+                <div class="gifts-header-text">
+                    <h2>Thoughtfully chosen gifts</h2>
+                    <div class="divider-center"></div>
+                    <p>These gift ideas were selected with care to reflect what truly matters in this celebration. Each
+                        one represents a meaningful way to be part of this moment.</p>
+                </div>
+
+                <div class="gifts-grid">
+                    <div class="gift-card-item">
+                        <h3>A magical<br>family trip</h3>
+                        <div class="gift-img-box">
+                            <img src="img/kids-cards-1.png" alt="Trip">
+                        </div>
+                        <button class="btn-contribute">Contribute</button>
+                    </div>
+                    <div class="gift-card-item">
+                        <h3>Learning<br>through play</h3>
+                        <div class="gift-img-box">
+                            <img src="img/kids-cards-2.png" alt="Learning">
+                        </div>
+                        <button class="btn-contribute">Contribute</button>
+                    </div>
+                    <div class="gift-card-item">
+                        <h3>Outdoor<br>adventures</h3>
+                        <div class="gift-img-box">
+                            <img src="img/kids-cards-3.png" alt="Outdoor">
+                        </div>
+                        <button class="btn-contribute">Contribute</button>
+                    </div>
+                    <div class="gift-card-item">
+                        <h3>Books, stories<br>and imagination</h3>
+                        <div class="gift-img-box">
+                            <img src="img/kids-cards-4.png" alt="Books">
+                        </div>
+                        <button class="btn-contribute">Contribute</button>
+                    </div>
+                    <div class="gift-card-item">
+                        <h3>Creative<br>play at home</h3>
+                        <div class="gift-img-box">
+                            <img src="img/kids-cards-5.png" alt="Creative">
+                        </div>
+                        <button class="btn-contribute">Contribute</button>
+                    </div>
+                    <div class="gift-card-item">
+                        <h3>A future<br>dream</h3>
+                        <div class="gift-img-box">
+                            <img src="img/kids-cards-6.png" alt="Dream">
+                        </div>
+                        <button class="btn-contribute">Contribute</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+
+        <div class="share-celebration-card">
+            <div class="share-content-limiter">
+
+                <div class="share-left">
+                    <h2>Invite those who matter</h2>
+                    <div class="yellow-dash-small"></div>
+                    <p>Send the link to friends and family so everyone<br>can be part of this special moment.</p>
+                </div>
+
+                <div class="share-right">
+                    <div class="share-bkg">
+                        <img src="img/bkg-share-cta.png" alt="">
+                    </div>
+                    <button class="btn-share-action">Share Celebration</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-orange-bg">
+            <div class="limit-celebration footer-content-wrapper">
+
+                <div class="footer-logo-area">
+                    <img src="img/logo-cado.png" alt="Cado Logo White" class="footer-logo">
+                </div>
+
+                <div class="footer-nav-row">
+                    <nav class="footer-menu">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About us</a>
+                        <a href="create-celebration.html">Create Celebration</a>
+                        <a href="index.html#faq">FAQ</a>
+                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="index.html#blog">Blog</a>
+                        <a href="index.html#newsletter">Newsletter</a>
+                    </nav>
+
+                    <div class="footer-actions">
+                        <button class="search-btn-footer"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                        <div class="social-row">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#">
+                                <img src="img/x-twitter-brands-solid-full.svg" alt="X" class="social-svg">
+                            </a>
+                            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Use and Service</a>
+                </div>
+
+            </div>
+
+            <div class="developer-bar">
+                <div class="dev-content">
+                    <a target="_blank" href="https://incandescente.com.br/"><img
+                            src="img/developed-by-incandescente.png" alt="Incandescente" class="dev-logo"></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <div id="rsvpModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-modal-btn"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="modal-header">
+                <h2>Confirm Presence</h2>
+                <p>Add yourself and your family members.</p>
+            </div>
+
+            <form id="rsvpForm" class="rsvp-form">
+                <div class="input-grid">
+                    <div class="input-wrapper">
+                        <label>Name</label>
+                        <input type="text" id="guestName" class="modal-input" placeholder="Full Name">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Email</label>
+                        <input type="email" id="guestEmail" class="modal-input" placeholder="contact@email.com">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Phone</label>
+                        <input type="tel" id="guestPhone" class="modal-input" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="input-wrapper small">
+                        <label>Age</label>
+                        <input type="number" id="guestAge" class="modal-input" placeholder="Age">
+                    </div>
+                    <div class="input-wrapper small">
+                        <label>Presence</label>
+                        <select id="guestStatus" class="modal-input">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" id="btnAddGuest" class="btn-add-guest">
+                    <i class="fa-solid fa-plus"></i> Add Guest to List
+                </button>
+
+                <div class="guest-list-container">
+                    <h4>Guest List:</h4>
+                    <ul id="guestList" class="guest-list">
+                        <li class="empty-msg">No guests added yet.</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn-confirm-final">Confirm RSVP</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="giftModal" class="modal-overlay">
+        <div class="modal-box gift-modal-box">
+            <button class="close-modal-btn close-gift-modal"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="gift-modal-header">
+                <div class="gift-thumb-box">
+                    <img id="modalGiftImg" src="" alt="Gift Image">
+                </div>
+                <div class="gift-text-info">
+                    <h3 id="modalGiftTitle">Gift Title</h3>
+                    <p>Your contribution helps make this dream come true. Every bit counts!</p>
+                </div>
+            </div>
+
+            <form class="gift-form">
+                <div class="input-wrapper">
+                    <label>Amount to contribute ($)</label>
+                    <div class="price-input-row">
+                        <input type="number" class="modal-input price-input" placeholder="0.00">
+                        <span class="currency-tag">USD</span>
+                    </div>
+                </div>
+
+                <div class="info-green-box">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>People usually contribute around <strong>$50.00</strong> for this gift.</span>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Your Name</label>
+                    <input type="text" class="modal-input" placeholder="Full Name">
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Leave a Message</label>
+                    <textarea class="modal-input" rows="3"
+                        placeholder="Write a warm message for the celebrant..."></textarea>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Email / Phone</label>
+                    <input type="text" class="modal-input" placeholder="Your contact info">
+                </div>
+
+                <button type="button" class="btn-confirm-final btn-confirm-gift">
+                    Confirm Contribution
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-box payment-modal-box">
+            <button class="close-modal-btn close-payment-modal"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="modal-header">
+                <h2>Secure Checkout</h2>
+                <div class="secure-badge">
+                    <i class="fa-solid fa-lock"></i> SSL Encrypted
+                </div>
+            </div>
+
+            <div class="payment-summary-card">
+                <div class="summary-row">
+                    <span class="summary-label">Gift:</span>
+                    <span class="summary-value" id="payGiftName">Magical Trip</span>
+                </div>
+                <div class="summary-row total">
+                    <span class="summary-label">Total Contribution:</span>
+                    <span class="summary-value" id="payTotalAmount">$0.00</span>
+                </div>
+            </div>
+
+            <div class="payment-tabs">
+                <button class="pay-tab active" data-method="card">
+                    <i class="fa-regular fa-credit-card"></i> Card
+                </button>
+                <button class="pay-tab" data-method="pix">
+                    <i class="fa-brands fa-pix"></i> Pix
+                </button>
+                <button class="pay-tab" data-method="apple">
+                    <i class="fa-brands fa-apple"></i> Pay
+                </button>
+            </div>
+
+            <form id="cardForm" class="payment-form active">
+                <div class="input-wrapper">
+                    <label>Card Number</label>
+                    <div class="input-icon-group">
+                        <i class="fa-regular fa-credit-card icon-left"></i>
+                        <input type="text" class="modal-input padded-left" placeholder="0000 0000 0000 0000">
+                    </div>
+                </div>
+
+                <div class="grid-2-col-pay">
+                    <div class="input-wrapper">
+                        <label>Expiry Date</label>
+                        <input type="text" class="modal-input" placeholder="MM/YY">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>CVV</label>
+                        <div class="input-icon-group">
+                            <i class="fa-solid fa-lock icon-left"></i>
+                            <input type="text" class="modal-input padded-left" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Cardholder Name</label>
+                    <input type="text" class="modal-input" placeholder="Name as on card">
+                </div>
+
+                <button type="button" class="btn-pay-now">
+                    Pay Now <span class="btnPayAmountDisplay">$0.00</span>
+                </button>
+            </form>
+
+            <div id="pixForm" class="payment-form" style="display: none;">
+                <div class="pix-content">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"
+                        alt="QR Code" class="qr-code-img">
+                    <p>Scan the QR Code or copy the key below to pay.</p>
+                    <div class="copy-paste-box">
+                        <span>00020126580014BR.GOV.BCB.PIX...</span>
+                        <button><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="appleForm" class="payment-form" style="display: none;">
+                <div class="apple-pay-content">
+                    <p>Confirm payment with Face ID or Touch ID.</p>
+
+                    <button type="button" class="btn-apple-pay">
+                        <span class="apple-logo"><i class="fa-brands fa-apple"></i></span>
+                        <span class="apple-text">Pay</span>
+                    </button>
+
+                    <p class="apple-note">Total to pay: <strong class="btnPayAmountDisplay">$0.00</strong></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Modal: Share Celebration -->
+    <div id="shareModal" class="modal-overlay">
+        <div class="modal-box share-modal-box">
+            <button class="close-modal-btn close-share-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Share Celebration</h2>
+                <p>Invite your friends and family to join the celebration!</p>
+            </div>
+            <div class="share-options-grid">
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn facebook">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
+                <a href="#" class="share-option-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                    target="_blank" class="share-option-btn twitter">
+                    <i class="fa-brands fa-x-twitter"></i> Twitter
+                </a>
+            </div>
+            <div class="copy-link-area">
+                <label>Celebration Link</label>
+                <div class="copy-input-group">
+                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

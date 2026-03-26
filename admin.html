@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Panel - Cado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="banner-container internal-mode">
+
+        <input type="checkbox" id="mobile-menu-toggle" class="hamburger-toggle">
+        
+        <label for="mobile-menu-toggle" class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav class="mobile-nav-drawer">
+            <a href="index.html">Home</a>
+            <a href="admin.html">Edit Celebration</a>
+            <a href="guestlist.html">Guest List</a>
+            <a href="messages.html">Messages</a>
+            <a href="#" id="shareBtnMobile">Share Celebration</a>
+            
+            <a href="statement.html" class="mobile-login-btn">
+                <i class="fa-solid fa-database"></i> Gift Statement
+            </a>
+            
+            <a href="index.html" style="margin-top: auto; color: #E36A4B;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </nav>
+
+        <div class="nav-overlay"></div>
+
+        <div class="logo-area">
+            <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo" class="logo"></a>
+        </div>
+
+        <div class="header-right">
+            <div class="login-area">
+                <button class="btn-login" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <nav class="banner-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="#" id="shareBtn">Share Celebration</a></li>
+                <li class="cc-highlight">
+                    <a href="statement.html"><i class="fa-solid fa-database"></i> Gift Statement</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="dashboard-wrapper">
+
+            <div class="dashboard-tabs">
+                <button class="dash-tab active" data-target="my-info">
+                    <i class="fa-regular fa-user"></i> My Info
+                </button>
+                <button class="dash-tab" data-target="my-parties">
+                    <i class="fa-solid fa-champagne-glasses"></i> My Parties
+                </button>
+                <button class="dash-tab create-btn" onclick="window.location.href='create-celebration.html'">
+                    <i class="fa-solid fa-plus"></i> Create Party
+                </button>
+            </div>
+
+            <div id="view-my-info" class="dash-content active">
+                <div class="info-card-wrapper">
+                    <h2 class="dash-title">My Personal Details</h2>
+                    <form class="admin-form">
+                        <div class="grid-2-col">
+                            <div class="input-wrapper">
+                                <label>Full Name</label>
+                                <input type="text" class="modal-input" value="Maria Silva">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Email</label>
+                                <input type="email" class="modal-input" value="maria@email.com">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Phone</label>
+                                <input type="text" class="modal-input" value="+1 555 000 0000">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Location</label>
+                                <input type="text" class="modal-input" value="London, UK">
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <label>Change Password</label>
+                            <input type="password" class="modal-input" placeholder="New Password">
+                        </div>
+                        <button type="button" class="btn-save-info">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="view-my-parties" class="dash-content">
+
+                <div id="party-list-container">
+                    <h2 class="dash-title">Your Celebrations</h2>
+
+                    <div class="parties-grid">
+                        <div class="party-preview-card active" onclick="openPartyAdmin('party-1')">
+                            <div class="party-status">Active</div>
+                            <h3>Mauro's 5th Birthday</h3>
+                            <p class="party-date"><i class="fa-regular fa-calendar"></i> Sept 23, 2026</p>
+                            <button class="btn-manage">Manage Party <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+
+                        <div class="party-preview-card ended">
+                            <div class="party-status">Ended</div>
+                            <h3>Baby Shower Julie</h3>
+                            <p class="party-date"><i class="fa-regular fa-calendar"></i> Jan 10, 2024</p>
+                            <button class="btn-manage secondary">View History</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="party-admin-view" style="display: none;">
+
+                    <button class="btn-back-dash" onclick="closePartyAdmin()">
+                        <i class="fa-solid fa-arrow-left"></i> Back to List
+                    </button>
+
+
+
+                    <div class="admin-party-replica">
+                        <div class="kids-party-wrapper">
+                            <div class="party-header-text">
+                                <h1>Welcome to <span>Mauro's</span> party!</h1>
+                                <div class="divider-center" style="margin: 15px 0;"></div>
+                            </div>
+
+                            <div class="party-content-grid" id="party-content-grid-preview">
+                                <div class="party-photo-box">
+                                    <img src="img/kids-img-1.png" alt="Mauro" class="party-main-img">
+                                </div>
+                                <div class="party-info-card">
+                                    <p class="party-description">
+                                        (Preview Mode) Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+                                    </p>
+                                    <div class="party-details-row">
+                                        <div class="detail-item"><i class="fa-regular fa-calendar text-orange"></i> Sept
+                                            23, 2026</div>
+                                        <div class="detail-item"><i class="fa-regular fa-clock text-orange"></i> 4h -
+                                            13h</div>
+                                    </div>
+                                    <div class="party-location">
+                                        <i class="fa-solid fa-location-dot text-orange"></i>
+                                        <div><strong>Kids Buffet</strong><br>Berkeley Gate, London</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section class="kids-gifts-section" style="margin-top: 40px;">
+                            <div class="party-header-text">
+                                <h1>Gift Collection Progress</h1>
+                                <p>See how your gifts are performing.</p>
+                                <div class="divider-center"></div>
+                            </div>
+                            <div class="gifts-grid">
+                                <div class="gift-card-item">
+                                    <h3>Magical Trip</h3>
+                                    <div class="gift-img-box"><img src="img/kids-cards-1.png"></div>
+                                    <button class="btn-contribute" style="background-color: #E36A4B;">$150
+                                        Raised</button>
+                                </div>
+                                <div class="gift-card-item">
+                                    <h3>Learning</h3>
+                                    <div class="gift-img-box"><img src="img/kids-cards-2.png"></div>
+                                    <button class="btn-contribute" style="background-color: #E36A4B;">$50
+                                        Raised</button>
+                                </div>
+                                <div class="gift-card-item">
+                                    <h3>Books</h3>
+                                    <div class="gift-img-box"><img src="img/kids-cards-4.png"></div>
+                                    <button class="btn-contribute">$0 Raised</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="admin-share-section">
+                        <h2>Share this event</h2>
+                        <div class="yellow-dash-small" style="margin: 10px auto;"></div>
+                        <p>Send the invite link to your friends and family.</p>
+
+                        <div class="share-box-admin">
+                            <input type="text" value="www.cado.com/mauros-party-23" readonly>
+                            <button class="btn-copy"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+
+                        <div class="admin-social-share">
+                            <button class="share-btn whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                            <button class="share-btn facebook"><i class="fa-brands fa-facebook-f"></i> Facebook</button>
+                            <button class="share-btn email"><i class="fa-regular fa-envelope"></i> Email</button>
+                            <button class="share-btn qrcode"><i class="fa-solid fa-qrcode"></i> QR Code</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer class="site-footer footer-admin">
+
+        <div class="footer-orange-bg">
+            <div class="limit-celebration footer-content-wrapper">
+
+                <div class="footer-logo-area">
+                    <img src="img/logo-cado.png" alt="Cado Logo White" class="footer-logo">
+                </div>
+
+                <div class="footer-nav-row">
+                    <nav class="footer-menu">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About us</a>
+                        <a href="create-celebration.html">Create Celebration</a>
+                        <a href="index.html#faq">FAQ</a>
+                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="index.html#blog">Blog</a>
+                        <a href="index.html#newsletter">Newsletter</a>
+                    </nav>
+
+                    <div class="footer-actions">
+                        <button class="search-btn-footer"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                        <div class="social-row">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#">
+                                <img src="img/x-twitter-brands-solid-full.svg" alt="X" class="social-svg">
+                            </a>
+                            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Use and Service</a>
+                </div>
+
+            </div>
+
+            <div class="developer-bar">
+                <div class="dev-content">
+                    <a target="_blank" href="https://incandescente.com.br/"><img
+                            src="img/developed-by-incandescente.png" alt="Incandescente" class="dev-logo"></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Script Inline específico para a lógica simples do Admin
+
+        // 1. Troca de Abas (My Info vs My Parties)
+        const dashTabs = document.querySelectorAll('.dash-tab:not(.create-btn)');
+        const dashContents = document.querySelectorAll('.dash-content');
+
+        dashTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active
+                dashTabs.forEach(t => t.classList.remove('active'));
+                dashContents.forEach(c => c.classList.remove('active'));
+
+                // Add active
+                tab.classList.add('active');
+                const target = tab.getAttribute('data-target');
+                document.getElementById('view-' + target).classList.add('active');
+            });
+        });
+
+        // 2. Abrir/Fechar Modo Admin da Festa
+        function openPartyAdmin(partyId) {
+            document.getElementById('party-list-container').style.display = 'none';
+            document.getElementById('party-admin-view').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function closePartyAdmin() {
+            document.getElementById('party-admin-view').style.display = 'none';
+            document.getElementById('party-list-container').style.display = 'block';
+        }
+    </script>
+
+    <!-- Modal: Share Celebration -->
+    <div id="shareModal" class="modal-overlay">
+        <div class="modal-box share-modal-box">
+            <button class="close-modal-btn close-share-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Share Celebration</h2>
+                <p>Invite your friends and family to join the celebration!</p>
+            </div>
+            <div class="share-options-grid">
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn facebook">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
+                <a href="#" class="share-option-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                    target="_blank" class="share-option-btn twitter">
+                    <i class="fa-brands fa-x-twitter"></i> Twitter
+                </a>
+            </div>
+            <div class="copy-link-area">
+                <label>Celebration Link</label>
+                <div class="copy-input-group">
+                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

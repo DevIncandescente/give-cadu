@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebration Messages - Cado</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="background-color: #fcfbf8;">
+
+    <section class="banner-container internal-mode">
+
+        <input type="checkbox" id="mobile-menu-toggle" class="hamburger-toggle">
+        
+        <label for="mobile-menu-toggle" class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav class="mobile-nav-drawer">
+            <a href="index.html">Home</a>
+            <a href="admin.html">Edit Celebration</a>
+            <a href="guestlist.html">Guest List</a>
+            <a href="messages.html">Messages</a>
+            <a href="#" id="shareBtnMobile">Share Celebration</a>
+            
+            <a href="statement.html" class="mobile-login-btn">
+                <i class="fa-solid fa-database"></i> Gift Statement
+            </a>
+            
+            <a href="index.html" style="margin-top: auto; color: #E36A4B;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </nav>
+
+        <div class="nav-overlay"></div>
+
+        <div class="logo-area">
+            <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo" class="logo"></a>
+        </div>
+
+        <div class="header-right">
+            <div class="login-area">
+                <button class="btn-login" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <nav class="banner-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="#" id="shareBtn">Share Celebration</a></li>
+                <li class="cc-highlight">
+                    <a href="statement.html"><i class="fa-solid fa-database"></i> Gift Statement</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="guest-list-container" style="max-width: 1200px;">
+
+            <div class="guest-list-header" style="text-align: center;">
+                <h1 style="color: var(--dark-grey); margin: 20px 0;">Well-wishes for Mauro's 5th
+                    Birthday</h1>
+                <div class="yellow-dash-small" style="margin: 0 auto 10px;"></div>
+                <p style="color: #666; font-size: 18px; margin-bottom: 40px;">Read all the beautiful messages from your
+                    friends and family.</p>
+            </div>
+
+            <div class="guest-list-actions" style="justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="search-filter-box" style="flex: 1; max-width: 400px;">
+                    <input type="text" class="modal-input" placeholder="Search by guest name..." id="searchMessages">
+                </div>
+                <div class="filter-pills" style="display: flex; gap: 10px;">
+                    <button class="cat-pill active" data-filter="all">All Messages</button>
+                    <button class="cat-pill" data-filter="gift">With Contribution</button>
+                    <button class="cat-pill" data-filter="simple">General Wishes</button>
+                </div>
+            </div>
+
+            <div class="messages-masonry-grid" id="messagesGrid">
+                <!-- Message Card 1 -->
+                <div class="message-card" data-type="gift">
+                    <div class="message-card-header">
+                        <div class="guest-avatar-small">M</div>
+                        <div>
+                            <h4 class="guest-msg-name">Maria Silva</h4>
+                            <span class="msg-date">Sept 21, 2026</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        Congratulations, Mauro! May your day be filled with magic and laughter. We can't wait to see you
+                        grow and conquer the world. 🎂🤡
+                    </div>
+                    <div class="msg-gift-badge">
+                        <i class="fa-solid fa-gift"></i> Magical Family Trip
+                    </div>
+                </div>
+
+                <!-- Message Card 2 -->
+                <div class="message-card" data-type="simple">
+                    <div class="message-card-header">
+                        <div class="guest-avatar-small" style="background-color: #F7B43E;">J</div>
+                        <div>
+                            <h4 class="guest-msg-name">João Santos</h4>
+                            <span class="msg-date">Sept 21, 2026</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        Happy birthday, little buddy! Wishing you the best year yet. Have a blast today! 🎈
+                    </div>
+                </div>
+
+                <!-- Message Card 3 -->
+                <div class="message-card" data-type="gift">
+                    <div class="message-card-header">
+                        <div class="guest-avatar-small" style="background-color: #E36A4B;">P</div>
+                        <div>
+                            <h4 class="guest-msg-name">Pedro Oliveira</h4>
+                            <span class="msg-date">Sept 22, 2026</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        To many adventures ahead! Hope you enjoy your gift. Love from the whole family. ❤️
+                    </div>
+                    <div class="msg-gift-badge">
+                        <i class="fa-solid fa-gift"></i> A Future Dream
+                    </div>
+                </div>
+
+                <!-- Message Card 4 -->
+                <div class="message-card" data-type="gift">
+                    <div class="message-card-header">
+                        <div class="guest-avatar-small" style="background-color: #2E7D32;">A</div>
+                        <div>
+                            <h4 class="guest-msg-name">Ana Beatriz</h4>
+                            <span class="msg-date">Sept 20, 2026</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        Happy 5th Birthday, Mauro! You are such a special kid. Here's a little something to help you
+                        fulfill your big dreams. Keep shining! ✨🌟
+                    </div>
+                    <div class="msg-gift-badge">
+                        <i class="fa-solid fa-gift"></i> Learning Through Play
+                    </div>
+                </div>
+
+                <!-- Message Card 5 -->
+                <div class="message-card" data-type="simple">
+                    <div class="message-card-header">
+                        <div class="guest-avatar-small" style="background-color: #4A90E2;">R</div>
+                        <div>
+                            <h4 class="guest-msg-name">Ricardo Lemos</h4>
+                            <span class="msg-date">Sept 22, 2026</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        Parabéns! Que sua festa seja incrível.
+                    </div>
+                </div>
+
+                <!-- Message Card 6 -->
+                <div class="message-card" data-type="gift">
+                    <div class="message-card-header">
+                        <div class="guest-avatar-small" style="background-color: #9B59B6;">L</div>
+                        <div>
+                            <h4 class="guest-msg-name">Lucia Ferrão</h4>
+                            <span class="msg-date">Sept 23, 2026</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        Happy birthday! Hope you have the most wonderful day. We sent a little gift to help with your
+                        big adventures. 🚀
+                    </div>
+                    <div class="msg-gift-badge">
+                        <i class="fa-solid fa-gift"></i> Magical Trip
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Modal: Share Celebration -->
+    <div id="shareModal" class="modal-overlay">
+        <div class="modal-box share-modal-box">
+            <button class="close-modal-btn close-share-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Share Celebration</h2>
+                <p>Invite your friends and family to join the celebration!</p>
+            </div>
+            <div class="share-options-grid">
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn facebook">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
+                <a href="#" class="share-option-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                    target="_blank" class="share-option-btn twitter">
+                    <i class="fa-brands fa-x-twitter"></i> Twitter
+                </a>
+            </div>
+            <div class="copy-link-area">
+                <label>Celebration Link</label>
+                <div class="copy-input-group">
+                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer footer-admin">
+        <div class="footer-orange-bg">
+            <div class="limit-celebration footer-content-wrapper">
+
+                <div class="footer-logo-area">
+                    <img src="img/logo-cado.png" alt="Cado Logo White" class="footer-logo">
+                </div>
+
+                <div class="footer-nav-row">
+                    <nav class="footer-menu">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About us</a>
+                        <a href="create-celebration.html">Create Celebration</a>
+                        <a href="index.html#faq">FAQ</a>
+                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="index.html#blog">Blog</a>
+                        <a href="index.html#newsletter">Newsletter</a>
+                    </nav>
+
+                    <div class="footer-actions">
+                        <button class="search-btn-footer"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                        <div class="social-row">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#">
+                                <img src="img/x-twitter-brands-solid-full.svg" alt="X" class="social-svg">
+                            </a>
+                            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Use and Service</a>
+                </div>
+
+            </div>
+
+            <div class="developer-bar">
+                <div class="dev-content">
+                    <a target="_blank" href="https://incandescente.com.br/"><img
+                            src="img/developed-by-incandescente.png" alt="Incandescente" class="dev-logo"></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Search functionality
+        document.getElementById('searchMessages').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.message-card');
+
+            cards.forEach(card => {
+                const name = card.querySelector('.guest-msg-name').textContent.toLowerCase();
+                const content = card.querySelector('.message-content').textContent.toLowerCase();
+
+                if (name.includes(searchTerm) || content.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-pills .cat-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // UI Toggle
+                document.querySelectorAll('.filter-pills .cat-pill').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                const cards = document.querySelectorAll('.message-card');
+
+                cards.forEach(card => {
+                    const type = card.getAttribute('data-type');
+                    if (filter === 'all' || type === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

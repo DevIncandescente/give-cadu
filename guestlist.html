@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest List - Cado</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="banner-container internal-mode">
+
+        <input type="checkbox" id="mobile-menu-toggle" class="hamburger-toggle">
+
+        <label for="mobile-menu-toggle" class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav class="mobile-nav-drawer">
+            <a href="index.html">Home</a>
+            <a href="admin.html">Edit Celebration</a>
+            <a href="guestlist.html">Guest List</a>
+            <a href="messages.html">Messages</a>
+            <a href="#" id="shareBtnMobile">Share Celebration</a>
+
+            <a href="statement.html" class="mobile-login-btn">
+                <i class="fa-solid fa-database"></i> Gift Statement
+            </a>
+
+            <a href="index.html" style="margin-top: auto; color: #E36A4B;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </nav>
+
+        <div class="nav-overlay"></div>
+
+        <div class="logo-area">
+            <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo" class="logo"></a>
+        </div>
+
+        <div class="header-right">
+            <div class="login-area">
+                <button class="btn-login" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <nav class="banner-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="guestlist.html">Guest List</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="#" id="shareBtn">Share Celebration</a></li>
+                <li class="cc-highlight">
+                    <a href="statement.html"><i class="fa-solid fa-database"></i> Gift Statement</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="guest-list-container">
+
+            <div class="guest-list-header">
+                <h1 style="color: var(--dark-grey); margin: 20px 0;">Mauro's 5th Birthday - Guest List
+                </h1>
+                <div class="yellow-dash-small" style="margin: 0 auto 10px;"></div>
+                <p style="color: #666; font-size: 18px; margin-bottom: 20px;">Manage your celebration guests, track
+                    RSVPs, and view contributions.</p>
+
+                <div class="guest-stats">
+                    <div class="stat-item">
+                        <i class="fa-solid fa-users"></i>
+                        <div>
+                            <strong style="font-size: 24px; color: var(--dark-grey);">24</strong>
+                            <p style="margin: 0; color: #666;">Total Guests</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <div>
+                            <strong style="font-size: 24px; color: #2E7D32;">18</strong>
+                            <p style="margin: 0; color: #666;">Confirmed</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <div>
+                            <strong style="font-size: 24px; color: #E65100;">4</strong>
+                            <p style="margin: 0; color: #666;">Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <div>
+                            <strong style="font-size: 24px; color: var(--primary-orange);">$450</strong>
+                            <p style="margin: 0; color: #666;">Total Raised</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guest-list-actions">
+                <div class="search-filter-box">
+                    <input type="text" class="modal-input" placeholder="Search by name or email..." id="searchGuests">
+                    <select class="modal-input" id="filterStatus">
+                        <option value="all">All Status</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="declined">Declined</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-cta-secondary" onclick="exportGuestList()">
+                        <i class="fa-solid fa-download"></i> Export CSV
+                    </button>
+                    <button class="btn-cta" onclick="window.location.href='admin.html'">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Panel
+                    </button>
+                </div>
+            </div>
+
+            <div class="guests-table-wrapper">
+                <table class="guests-table">
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Contribution</th>
+                            <th>Message</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guestsTableBody">
+                        <tr>
+                            <td data-label="Guest Name">
+                                <div class="guest-name-cell">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <strong>Maria Silva</strong>
+                                </div>
+                            </td>
+                            <td data-label="Email">maria.silva@email.com</td>
+                            <td data-label="Phone">+1 555 0001</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
+                            <td data-label="Contribution" class="contribution-cell">$50</td>
+                            <td data-label="Message" class="message-cell">So happy to celebrate with you!</td>
+                            <td data-label="Actions">
+                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-icon" title="Send Message"><i
+                                        class="fa-solid fa-envelope"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Guest Name">
+                                <div class="guest-name-cell">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <strong>João Santos</strong>
+                                </div>
+                            </td>
+                            <td data-label="Email">joao.santos@email.com</td>
+                            <td data-label="Phone">+1 555 0002</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
+                            <td data-label="Contribution" class="contribution-cell">$75</td>
+                            <td data-label="Message" class="message-cell">Can't wait for the party!</td>
+                            <td data-label="Actions">
+                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-icon" title="Send Message"><i
+                                        class="fa-solid fa-envelope"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Guest Name">
+                                <div class="guest-name-cell">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <strong>Ana Costa</strong>
+                                </div>
+                            </td>
+                            <td data-label="Email">ana.costa@email.com</td>
+                            <td data-label="Phone">+1 555 0003</td>
+                            <td data-label="Status"><span class="status-badge pending">Pending</span></td>
+                            <td data-label="Contribution" class="contribution-cell">$0</td>
+                            <td data-label="Message" class="message-cell">-</td>
+                            <td data-label="Actions">
+                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-icon" title="Send Reminder"><i class="fa-solid fa-bell"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Guest Name">
+                                <div class="guest-name-cell">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <strong>Pedro Oliveira</strong>
+                                </div>
+                            </td>
+                            <td data-label="Email">pedro.oliveira@email.com</td>
+                            <td data-label="Phone">+1 555 0004</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
+                            <td data-label="Contribution" class="contribution-cell">$100</td>
+                            <td data-label="Message" class="message-cell">Wishing Mauro an amazing birthday!</td>
+                            <td data-label="Actions">
+                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-icon" title="Send Message"><i
+                                        class="fa-solid fa-envelope"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Guest Name">
+                                <div class="guest-name-cell">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <strong>Carla Mendes</strong>
+                                </div>
+                            </td>
+                            <td data-label="Email">carla.mendes@email.com</td>
+                            <td data-label="Phone">+1 555 0005</td>
+                            <td data-label="Status"><span class="status-badge declined">Declined</span></td>
+                            <td data-label="Contribution" class="contribution-cell">$0</td>
+                            <td data-label="Message" class="message-cell">Sorry, can't make it this time</td>
+                            <td data-label="Actions">
+                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-icon" title="Send Message"><i
+                                        class="fa-solid fa-envelope"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Guest Name">
+                                <div class="guest-name-cell">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <strong>Lucas Ferreira</strong>
+                                </div>
+                            </td>
+                            <td data-label="Email">lucas.ferreira@email.com</td>
+                            <td data-label="Phone">+1 555 0006</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
+                            <td data-label="Contribution" class="contribution-cell">$25</td>
+                            <td data-label="Message" class="message-cell">Looking forward to it!</td>
+                            <td data-label="Actions">
+                                <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-icon" title="Send Message"><i
+                                        class="fa-solid fa-envelope"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer class="site-footer footer-admin">
+        <div class="footer-orange-bg">
+            <div class="limit-celebration footer-content-wrapper">
+
+                <div class="footer-logo-area">
+                    <img src="img/logo-cado.png" alt="Cado Logo White" class="footer-logo">
+                </div>
+
+                <div class="footer-nav-row">
+                    <nav class="footer-menu">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About us</a>
+                        <a href="create-celebration.html">Create Celebration</a>
+                        <a href="index.html#faq">FAQ</a>
+                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="index.html#blog">Blog</a>
+                        <a href="index.html#newsletter">Newsletter</a>
+                    </nav>
+
+                    <div class="footer-actions">
+                        <button class="search-btn-footer"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                        <div class="social-row">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#">
+                                <img src="img/x-twitter-brands-solid-full.svg" alt="X" class="social-svg">
+                            </a>
+                            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Use and Service</a>
+                </div>
+
+            </div>
+
+            <div class="developer-bar">
+                <div class="dev-content">
+                    <a target="_blank" href="https://incandescente.com.br/"><img
+                            src="img/developed-by-incandescente.png" alt="Incandescente" class="dev-logo"></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Search functionality
+        document.getElementById('searchGuests').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#guestsTableBody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('.guest-name-cell strong').textContent.toLowerCase();
+                const email = row.querySelectorAll('td')[1].textContent.toLowerCase();
+
+                if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter by status
+        document.getElementById('filterStatus').addEventListener('change', function (e) {
+            const filterValue = e.target.value;
+            const rows = document.querySelectorAll('#guestsTableBody tr');
+
+            rows.forEach(row => {
+                const statusBadge = row.querySelector('.status-badge');
+                const status = statusBadge.classList.contains('confirmed') ? 'confirmed' :
+                    statusBadge.classList.contains('pending') ? 'pending' : 'declined';
+
+                if (filterValue === 'all' || status === filterValue) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Export to CSV
+        function exportGuestList() {
+            const rows = document.querySelectorAll('#guestsTableBody tr');
+            let csv = 'Name,Email,Phone,Status,Contribution,Message\n';
+
+            rows.forEach(row => {
+                if (row.style.display !== 'none') {
+                    const cells = row.querySelectorAll('td');
+                    const name = cells[0].querySelector('strong').textContent;
+                    const email = cells[1].textContent;
+                    const phone = cells[2].textContent;
+                    const status = cells[3].textContent.trim();
+                    const contribution = cells[4].textContent;
+                    const message = cells[5].textContent;
+
+                    csv += `"${name}","${email}","${phone}","${status}","${contribution}","${message}"\n`;
+                }
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'guest-list.csv';
+            a.click();
+        }
+    </script>
+
+    <!-- Modal: Share Celebration -->
+    <div id="shareModal" class="modal-overlay">
+        <div class="modal-box share-modal-box">
+            <button class="close-modal-btn close-share-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2>Share Celebration</h2>
+                <p>Invite your friends and family to join the celebration!</p>
+            </div>
+            <div class="share-options-grid">
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                    target="_blank" class="share-option-btn facebook">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
+                <a href="#" class="share-option-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                    target="_blank" class="share-option-btn twitter">
+                    <i class="fa-brands fa-x-twitter"></i> Twitter
+                </a>
+            </div>
+            <div class="copy-link-area">
+                <label>Celebration Link</label>
+                <div class="copy-input-group">
+                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
