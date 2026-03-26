@@ -577,6 +577,13 @@ button:hover,
 /* --- RESPONSIVIDADE (Media Queries) --- */
 /* ========================================= */
 
+/* Telas entre 1401px e 1610px - Logo menor para não quebrar o menu */
+@media (max-width: 1610px) {
+    .logo {
+        max-width: 180px;
+    }
+}
+
 /* Tablet e Telas Médias (até 1024px) */
 @media (max-width: 1024px) {
     .banner-nav {
