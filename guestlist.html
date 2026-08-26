@@ -13,10 +13,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260805-2">
 </head>
 
-<body>
+<body class="guest-list-page">
 
     <section class="banner-container internal-mode">
 
@@ -30,7 +30,7 @@
 
         <nav class="mobile-nav-drawer">
             <a href="index.html">Home</a>
-            <a href="admin.html">Edit Celebration</a>
+            <a href="create-celebration.html">Edit Celebration</a>
             <a href="guestlist.html">Guest List</a>
             <a href="messages.html">Messages</a>
             <a href="#" id="shareBtnMobile">Share Celebration</a>
@@ -61,7 +61,7 @@
         <nav class="banner-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="create-celebration.html">Edit Celebration</a></li>
                 <li><a href="guestlist.html">Guest List</a></li>
                 <li><a href="messages.html">Messages</a></li>
                 <li><a href="#" id="shareBtn">Share Celebration</a></li>
@@ -103,9 +103,9 @@
                         </div>
                     </div>
                     <div class="stat-item">
-                        <i class="fa-solid fa-dollar-sign"></i>
+                        <i class="fa-solid fa-sterling-sign"></i>
                         <div>
-                            <strong style="font-size: 24px; color: var(--primary-orange);">$450</strong>
+                            <strong style="font-size: 24px; color: var(--primary-orange);">£450</strong>
                             <p style="margin: 0; color: #666;">Total Raised</p>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                             <td data-label="Email">maria.silva@email.com</td>
                             <td data-label="Phone">+1 555 0001</td>
                             <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
-                            <td data-label="Contribution" class="contribution-cell">$50</td>
+                            <td data-label="Contribution" class="contribution-cell">£50</td>
                             <td data-label="Message" class="message-cell">So happy to celebrate with you!</td>
                             <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
@@ -174,7 +174,7 @@
                             <td data-label="Email">joao.santos@email.com</td>
                             <td data-label="Phone">+1 555 0002</td>
                             <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
-                            <td data-label="Contribution" class="contribution-cell">$75</td>
+                            <td data-label="Contribution" class="contribution-cell">£75</td>
                             <td data-label="Message" class="message-cell">Can't wait for the party!</td>
                             <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
@@ -192,7 +192,7 @@
                             <td data-label="Email">ana.costa@email.com</td>
                             <td data-label="Phone">+1 555 0003</td>
                             <td data-label="Status"><span class="status-badge pending">Pending</span></td>
-                            <td data-label="Contribution" class="contribution-cell">$0</td>
+                            <td data-label="Contribution" class="contribution-cell">£0</td>
                             <td data-label="Message" class="message-cell">-</td>
                             <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
@@ -209,7 +209,7 @@
                             <td data-label="Email">pedro.oliveira@email.com</td>
                             <td data-label="Phone">+1 555 0004</td>
                             <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
-                            <td data-label="Contribution" class="contribution-cell">$100</td>
+                            <td data-label="Contribution" class="contribution-cell">£100</td>
                             <td data-label="Message" class="message-cell">Wishing Mauro an amazing birthday!</td>
                             <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
@@ -227,7 +227,7 @@
                             <td data-label="Email">carla.mendes@email.com</td>
                             <td data-label="Phone">+1 555 0005</td>
                             <td data-label="Status"><span class="status-badge declined">Declined</span></td>
-                            <td data-label="Contribution" class="contribution-cell">$0</td>
+                            <td data-label="Contribution" class="contribution-cell">£0</td>
                             <td data-label="Message" class="message-cell">Sorry, can't make it this time</td>
                             <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
@@ -245,7 +245,7 @@
                             <td data-label="Email">lucas.ferreira@email.com</td>
                             <td data-label="Phone">+1 555 0006</td>
                             <td data-label="Status"><span class="status-badge confirmed">Confirmed</span></td>
-                            <td data-label="Contribution" class="contribution-cell">$25</td>
+                            <td data-label="Contribution" class="contribution-cell">£25</td>
                             <td data-label="Message" class="message-cell">Looking forward to it!</td>
                             <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
@@ -274,7 +274,7 @@
                         <a href="index.html">Home</a>
                         <a href="index.html#about">About us</a>
                         <a href="create-celebration.html">Create Celebration</a>
-                        <a href="index.html#faq">FAQ</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="index.html#testimonials">Testimonials</a>
                         <a href="index.html#blog">Blog</a>
                         <a href="index.html#newsletter">Newsletter</a>
@@ -298,9 +298,9 @@
                 <div class="footer-divider"></div>
 
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#">Terms of Use and Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="terms-of-use-and-service.html">Terms of Use and Service</a>
                 </div>
 
             </div>
@@ -315,7 +315,8 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="vendor/qrcode.bundle.js"></script>
+    <script src="script.js?v=20260805-2"></script>
     <script>
         // Search functionality
         document.getElementById('searchGuests').addEventListener('input', function (e) {
@@ -389,18 +390,18 @@
                 <p>Invite your friends and family to join the celebration!</p>
             </div>
             <div class="share-options-grid">
-                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn whatsapp">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn facebook">
                     <i class="fa-brands fa-facebook-f"></i> Facebook
                 </a>
                 <a href="#" class="share-option-btn instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/mauro-5&text=Come%20celebrate%20with%20us!"
                     target="_blank" class="share-option-btn twitter">
                     <i class="fa-brands fa-x-twitter"></i> Twitter
                 </a>
@@ -408,7 +409,7 @@
             <div class="copy-link-area">
                 <label>Celebration Link</label>
                 <div class="copy-input-group">
-                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <input type="text" value="https://cado.com/mauro-5" id="shareUrl" readonly>
                     <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
                 </div>
             </div>
@@ -418,3 +419,4 @@
 </body>
 
 </html>
+

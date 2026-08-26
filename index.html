@@ -13,15 +13,15 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260805-2">
 </head>
 
-<body>
+<body class="home-page">
 
     <section class="banner-container">
 
         <div class="logo-area">
-            <img src="img/logo-cado.png" alt="Cado Logo" class="logo">
+            <a href="index.html"><img src="img/logo-cado.png" alt="Cado Logo" class="logo"></a>
         </div>
 
         <div class="header-right">
@@ -43,29 +43,14 @@
 
         <nav class="banner-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li class="active-item"><a href="index.html">Home</a></li>
                 <li><a href="#about">About us</a></li>
-
-                <li>
-                    <a href="create-celebration.html">Create Celebration</a>
-                    <div class="dropdown-menu">
-                        <a href="create-celebration.html">Baby Celebrations</a>
-                        <a href="create-celebration.html">Children's Celebrations</a>
-                        <a href="create-celebration.html">Weddings & partnerships</a>
-                    </div>
-                </li>
-
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="create-celebration.html">Create Celebration</a></li>
+                <li><a href="faq.html">FAQ</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="#newsletter">Newsletter</a></li>
             </ul>
-
-            <div class="search-box" id="searchBox">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
-                <button class="btn-search" onclick="toggleSearch()"><i
-                        class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
         </nav>
         <!-- Mobile hamburger (CSS-only toggle) -->
         <input type="checkbox" id="hamburger-toggle" class="hamburger-toggle">
@@ -79,9 +64,9 @@
             <a href="index.html">Home</a>
             <a href="index.html#about">About us</a>
             <a href="create-celebration.html">Create Celebration</a>
-            <a href="index.html#faq">FAQ</a>
+            <a href="faq.html">FAQ</a>
             <a href="index.html#testimonials">Testimonials</a>
-            <a href="index.html#blog">Blog</a>
+            <a href="blog.html">Blog</a>
             <a href="login.html" class="mobile-login-btn">Login</a>
         </nav>
 
@@ -92,9 +77,7 @@
         <div class="hero-content" id="banner-home">
             <h1>Celebrate together.<br>Give with meaning.</h1>
             <div class="divider"></div>
-            <p>A modern way to celebrate life's special moments<br>
-                – where guests come together to support meaningful<br>
-                gifts, not just buy things.</p>
+            <p>Create a beautiful invitation, gather RSVPs, and let everyone be part of a gift that truly matters.</p>
 
             <a href="create-celebration.html" class="btn-cta">Create Celebration</a>
         </div>
@@ -132,9 +115,8 @@
                         <img src="img/confetti.svg" alt="Create">
                     </div>
                     <div class="step-content">
-                        <h3>Create your celebration</h3>
-                        <p>Choose the type of moment you're celebrating and add a few meaningful gift ideas that reflect
-                            it.</p>
+                        <h3>Bring your celebration to life</h3>
+                        <p>Add the event details, RSVP, messages and meaningful gift ideas in one simple place.</p>
                     </div>
                 </div>
 
@@ -143,8 +125,8 @@
                         <img src="img/send.svg" alt="Share">
                     </div>
                     <div class="step-content">
-                        <h3>Share the link</h3>
-                        <p>Invite friends and family with a single link – easy to share, easy to join.</p>
+                        <h3>Share it your way</h3>
+                        <p>Send one simple link by WhatsApp, message or email - or download a printable invitation with a QR code.</p>
                     </div>
                 </div>
 
@@ -153,9 +135,8 @@
                         <img src="img/gift.svg" alt="Celebrate">
                     </div>
                     <div class="step-content">
-                        <h3>Celebrate together</h3>
-                        <p>Guests contribute in their own way, leaving messages and becoming part of something special.
-                        </p>
+                        <h3>Give and celebrate together</h3>
+                        <p>Guests can RSVP, leave a message and be part of a gift that truly matters.</p>
                     </div>
                 </div>
 
@@ -216,7 +197,7 @@
                 </div>
 
                 <div class="celebration-card">
-                    <h3>Children’s<br>Celebrations</h3>
+                    <h3>Children's<br>Celebrations</h3>
 
                     <div class="card-image-box">
                         <img src="img/card-2.png" alt="Children" class="card-img">
@@ -249,32 +230,28 @@
 
                 <div class="faq-left">
                     <div class="section-tag">
-                        <div class="section-tag">
-                            <img src="img/icon1.svg" alt="icon" class="tag-icon">
-                            <span>FAQ</span>
-                        </div>
-
+                        <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                        <span>FAQ</span>
                     </div>
 
                     <h2>A few things people<br>often wonder.</h2>
                     <div class="yellow-dash-small"></div>
 
                     <p>Every celebration is different. These answers help explain how Cado keeps moments simple, calm,
-                        and meaningful — for hosts and guests alike.</p>
+                        and meaningful - for hosts and guests alike.</p>
 
-                    <button class="btn-cta-secondary btn-faq-custom">See the full FAQ</button>
+                    <a href="faq.html" class="btn-cta-secondary btn-faq-custom">See the full FAQ</a>
                 </div>
 
                 <div class="faq-right">
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>What makes Cado different from traditional gift lists?</span>
+                            <span>What makes Cado different from a traditional gift list?</span>
                             <i class="fa-solid fa-plus icon-toggle"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>Cado focuses on meaningful contributions rather than just physical items, allowing guests
-                                to participate in the celebration in a more personal way.</p>
+                            <p>Cado lets hosts choose meaningful gift ideas, while guests can contribute privately towards them in a way that feels comfortable. It keeps gifting thoughtful, flexible and simple.</p>
                         </div>
                     </div>
 
@@ -284,19 +261,37 @@
                             <i class="fa-solid fa-plus icon-toggle"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>No.<br>Contributions are private, keeping the focus on the celebration — not the amount.
-                            </p>
+                            <p>No. Contributions are private. Guests choose what feels right for them, without comparison or pressure.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>Is Cado easy to use for guests?</span>
+                            <span>Is Cado easy for guests to use?</span>
                             <i class="fa-solid fa-plus icon-toggle"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>Yes! No account creation is needed for guests. They simply click the link, choose how to
-                                contribute, and leave a message.</p>
+                            <p>Yes. Guests open the link, RSVP, leave a message and can be part of a meaningful gift in just a few simple steps.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do guests need to create an account?</span>
+                            <i class="fa-solid fa-plus icon-toggle"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No. Guests do not need an account to RSVP, leave a message or contribute. The experience is designed to be quick and simple.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How do hosts receive the contributions?</span>
+                            <i class="fa-solid fa-plus icon-toggle"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Hosts receive the contributions securely after the celebration, giving them the freedom to use them towards the gift ideas they chose.</p>
                         </div>
                     </div>
 
@@ -377,8 +372,6 @@
 
 
     </div>
-    </section>
-    </div>
 
     <section class="blog-section" id="blog">
         <div class="limit-celebration">
@@ -386,17 +379,15 @@
             <div class="blog-header">
                 <div class="blog-header-left">
                     <div class="section-tag">
-                        <div class="section-tag">
-                            <img src="img/icon1.svg" alt="icon" class="tag-icon">
-                            <span>Blog</span>
-                        </div>
+                        <img src="img/icon1.svg" alt="icon" class="tag-icon">
+                        <span>Blog</span>
                     </div>
                     <h2>Stories, ideas, and<br>thoughtful celebrations.</h2>
                     <div class="yellow-dash-small"></div>
                 </div>
 
                 <div class="blog-header-right">
-                    <button class="btn-cta-secondary">See all the posts</button>
+                    <a href="blog.html" class="btn-cta-secondary">See all the posts</a>
                 </div>
             </div>
 
@@ -409,11 +400,11 @@
 
                     <div class="blog-content-overlay">
                         <span class="blog-category text-white">Children's celebrations</span>
-                        <span class="blog-date text-white-op">Jan 20, 2026 • No Comments</span>
+                        <span class="blog-date text-white-op">Jan 20, 2026 &bull; No Comments</span>
 
                         <h3 class="text-white">How to plan a fun birthday without overspending</h3>
 
-                        <a href="#" class="btn-read-more">
+                        <a href="blog-fun-birthday-without-overspending.html" class="btn-read-more">
                             Read More <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
@@ -424,12 +415,12 @@
                         <img src="img/blog-card-2.png" alt="Kids playing" class="blog-img-std">
                     </div>
                     <div class="blog-content-std">
-                        <span class="blog-category">Children's celebrations</span>
-                        <span class="blog-date">Jan 20, 2026 • No Comments</span>
+                        <span class="blog-category">Hosting tips</span>
+                        <span class="blog-date">Jan 23, 2026 &bull; No Comments</span>
 
-                        <h3>How to plan a fun birthday without overspending</h3>
+                        <h3>How to make a celebration page feel personal</h3>
 
-                        <a href="#" class="btn-read-more">
+                        <a href="blog-personal-celebration-page.html" class="btn-read-more">
                             Read More <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
@@ -440,12 +431,12 @@
                         <img src="img/blog-card-3.png" alt="Birthday cake" class="blog-img-std">
                     </div>
                     <div class="blog-content-std">
-                        <span class="blog-category">Children's celebrations</span>
-                        <span class="blog-date">Jan 20, 2026 • No Comments</span>
+                        <span class="blog-category">Birthday ideas</span>
+                        <span class="blog-date">Jan 27, 2026 &bull; No Comments</span>
 
-                        <h3>How to plan a fun birthday without overspending</h3>
+                        <h3>Simple traditions that make birthdays feel meaningful</h3>
 
-                        <a href="#" class="btn-read-more">
+                        <a href="blog-birthday-traditions.html" class="btn-read-more">
                             Read More <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
@@ -470,7 +461,7 @@
                 </div>
 
                 <div class="news-right">
-                    <p>Get gentle inspiration, celebration ideas, and stories about meaningful giving – delivered
+                    <p>Get gentle inspiration, celebration ideas, and stories about meaningful giving - delivered
                         occasionally, always thoughtfully.</p>
 
                     <form class="news-form">
@@ -493,7 +484,7 @@
                         <a href="index.html">Home</a>
                         <a href="#about">About us</a>
                         <a href="create-celebration.html">Create Celebration</a>
-                        <a href="#faq">FAQ</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="#testimonials">Testimonials</a>
                         <a href="#blog">Blog</a>
                         <a href="#newsletter">Newsletter</a>
@@ -517,9 +508,9 @@
                 <div class="footer-divider"></div>
 
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#">Terms of Use and Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="terms-of-use-and-service.html">Terms of Use and Service</a>
                 </div>
 
             </div>
@@ -534,7 +525,7 @@
 
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=20260805-2"></script>
 
     <script>
 
@@ -543,3 +534,4 @@
 </body>
 
 </html>
+

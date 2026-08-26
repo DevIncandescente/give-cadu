@@ -13,10 +13,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260805-2">
 </head>
 
-<body style="background-color: #fcfbf8;">
+<body class="messages-page" style="background-color: #fcfbf8;">
 
     <section class="banner-container internal-mode">
 
@@ -30,7 +30,7 @@
 
         <nav class="mobile-nav-drawer">
             <a href="index.html">Home</a>
-            <a href="admin.html">Edit Celebration</a>
+            <a href="create-celebration.html">Edit Celebration</a>
             <a href="guestlist.html">Guest List</a>
             <a href="messages.html">Messages</a>
             <a href="#" id="shareBtnMobile">Share Celebration</a>
@@ -61,7 +61,7 @@
         <nav class="banner-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="create-celebration.html">Edit Celebration</a></li>
                 <li><a href="guestlist.html">Guest List</a></li>
                 <li><a href="messages.html">Messages</a></li>
                 <li><a href="#" id="shareBtn">Share Celebration</a></li>
@@ -90,11 +90,15 @@
                     <button class="cat-pill" data-filter="gift">With Contribution</button>
                     <button class="cat-pill" data-filter="simple">General Wishes</button>
                 </div>
+                <a class="btn-cta-secondary btn-bulk-thanks"
+                    href="mailto:?subject=Thank%20you%20for%20being%20part%20of%20Mauro%27s%20celebration&amp;body=Thank%20you%20for%20celebrating%20with%20us.%20Your%20message%20and%20support%20made%20the%20day%20even%20more%20meaningful.">
+                    <i class="fa-regular fa-envelope"></i> Send thank-you message
+                </a>
             </div>
 
             <div class="messages-masonry-grid" id="messagesGrid">
                 <!-- Message Card 1 -->
-                <div class="message-card" data-type="gift">
+                <div class="message-card" data-type="gift" data-email="maria.silva@email.com">
                     <div class="message-card-header">
                         <div class="guest-avatar-small">M</div>
                         <div>
@@ -112,7 +116,7 @@
                 </div>
 
                 <!-- Message Card 2 -->
-                <div class="message-card" data-type="simple">
+                <div class="message-card" data-type="simple" data-email="joao.santos@email.com">
                     <div class="message-card-header">
                         <div class="guest-avatar-small" style="background-color: #F7B43E;">J</div>
                         <div>
@@ -126,7 +130,7 @@
                 </div>
 
                 <!-- Message Card 3 -->
-                <div class="message-card" data-type="gift">
+                <div class="message-card" data-type="gift" data-email="pedro.oliveira@email.com">
                     <div class="message-card-header">
                         <div class="guest-avatar-small" style="background-color: #E36A4B;">P</div>
                         <div>
@@ -143,7 +147,7 @@
                 </div>
 
                 <!-- Message Card 4 -->
-                <div class="message-card" data-type="gift">
+                <div class="message-card" data-type="gift" data-email="ana.costa@email.com">
                     <div class="message-card-header">
                         <div class="guest-avatar-small" style="background-color: #2E7D32;">A</div>
                         <div>
@@ -161,7 +165,7 @@
                 </div>
 
                 <!-- Message Card 5 -->
-                <div class="message-card" data-type="simple">
+                <div class="message-card" data-type="simple" data-email="ricardo.lemos@email.com">
                     <div class="message-card-header">
                         <div class="guest-avatar-small" style="background-color: #4A90E2;">R</div>
                         <div>
@@ -175,7 +179,7 @@
                 </div>
 
                 <!-- Message Card 6 -->
-                <div class="message-card" data-type="gift">
+                <div class="message-card" data-type="gift" data-email="lucia.ferrao@email.com">
                     <div class="message-card-header">
                         <div class="guest-avatar-small" style="background-color: #9B59B6;">L</div>
                         <div>
@@ -206,18 +210,18 @@
                 <p>Invite your friends and family to join the celebration!</p>
             </div>
             <div class="share-options-grid">
-                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn whatsapp">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn facebook">
                     <i class="fa-brands fa-facebook-f"></i> Facebook
                 </a>
                 <a href="#" class="share-option-btn instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/mauro-5&text=Come%20celebrate%20with%20us!"
                     target="_blank" class="share-option-btn twitter">
                     <i class="fa-brands fa-x-twitter"></i> Twitter
                 </a>
@@ -225,7 +229,7 @@
             <div class="copy-link-area">
                 <label>Celebration Link</label>
                 <div class="copy-input-group">
-                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <input type="text" value="https://cado.com/mauro-5" id="shareUrl" readonly>
                     <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
                 </div>
             </div>
@@ -245,7 +249,7 @@
                         <a href="index.html">Home</a>
                         <a href="index.html#about">About us</a>
                         <a href="create-celebration.html">Create Celebration</a>
-                        <a href="index.html#faq">FAQ</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="index.html#testimonials">Testimonials</a>
                         <a href="index.html#blog">Blog</a>
                         <a href="index.html#newsletter">Newsletter</a>
@@ -269,9 +273,9 @@
                 <div class="footer-divider"></div>
 
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#">Terms of Use and Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="terms-of-use-and-service.html">Terms of Use and Service</a>
                 </div>
 
             </div>
@@ -286,24 +290,26 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="vendor/qrcode.bundle.js"></script>
+    <script src="script.js?v=20260805-2"></script>
     <script>
-        // Search functionality
-        document.getElementById('searchMessages').addEventListener('input', function (e) {
-            const searchTerm = e.target.value.toLowerCase();
+        let activeMessageFilter = 'all';
+
+        function filterMessages() {
+            const searchTerm = document.getElementById('searchMessages').value.trim().toLowerCase();
             const cards = document.querySelectorAll('.message-card');
 
             cards.forEach(card => {
                 const name = card.querySelector('.guest-msg-name').textContent.toLowerCase();
                 const content = card.querySelector('.message-content').textContent.toLowerCase();
-
-                if (name.includes(searchTerm) || content.includes(searchTerm)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
+                const type = card.getAttribute('data-type');
+                const matchesSearch = !searchTerm || name.includes(searchTerm) || content.includes(searchTerm);
+                const matchesType = activeMessageFilter === 'all' || type === activeMessageFilter;
+                card.style.display = matchesSearch && matchesType ? '' : 'none';
             });
-        });
+        }
+
+        document.getElementById('searchMessages').addEventListener('input', filterMessages);
 
         // Filter functionality
         document.querySelectorAll('.filter-pills .cat-pill').forEach(btn => {
@@ -312,17 +318,8 @@
                 document.querySelectorAll('.filter-pills .cat-pill').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                const filter = btn.getAttribute('data-filter');
-                const cards = document.querySelectorAll('.message-card');
-
-                cards.forEach(card => {
-                    const type = card.getAttribute('data-type');
-                    if (filter === 'all' || type === filter) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                activeMessageFilter = btn.getAttribute('data-filter');
+                filterMessages();
             });
         });
     </script>
@@ -330,3 +327,4 @@
 </body>
 
 </html>
+

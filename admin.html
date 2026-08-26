@@ -9,10 +9,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260805-2">
 </head>
 
-<body>
+<body class="host-dashboard-page">
 
     <section class="banner-container internal-mode">
 
@@ -26,7 +26,7 @@
 
         <nav class="mobile-nav-drawer">
             <a href="index.html">Home</a>
-            <a href="admin.html">Edit Celebration</a>
+            <a href="create-celebration.html">Edit Celebration</a>
             <a href="guestlist.html">Guest List</a>
             <a href="messages.html">Messages</a>
             <a href="#" id="shareBtnMobile">Share Celebration</a>
@@ -57,7 +57,7 @@
         <nav class="banner-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="create-celebration.html">Edit Celebration</a></li>
                 <li><a href="guestlist.html">Guest List</a></li>
                 <li><a href="messages.html">Messages</a></li>
                 <li><a href="#" id="shareBtn">Share Celebration</a></li>
@@ -181,19 +181,19 @@
                                 <div class="gift-card-item">
                                     <h3>Magical Trip</h3>
                                     <div class="gift-img-box"><img src="img/kids-cards-1.png"></div>
-                                    <button class="btn-contribute" style="background-color: #E36A4B;">$150
+                                    <button class="btn-contribute" style="background-color: #E36A4B;">£150
                                         Raised</button>
                                 </div>
                                 <div class="gift-card-item">
                                     <h3>Learning</h3>
                                     <div class="gift-img-box"><img src="img/kids-cards-2.png"></div>
-                                    <button class="btn-contribute" style="background-color: #E36A4B;">$50
+                                    <button class="btn-contribute" style="background-color: #E36A4B;">£50
                                         Raised</button>
                                 </div>
                                 <div class="gift-card-item">
                                     <h3>Books</h3>
                                     <div class="gift-img-box"><img src="img/kids-cards-4.png"></div>
-                                    <button class="btn-contribute">$0 Raised</button>
+                                    <button class="btn-contribute">£0 Raised</button>
                                 </div>
                             </div>
                         </section>
@@ -205,15 +205,15 @@
                         <p>Send the invite link to your friends and family.</p>
 
                         <div class="share-box-admin">
-                            <input type="text" value="www.cado.com/mauros-party-23" readonly>
-                            <button class="btn-copy"><i class="fa-regular fa-copy"></i> Copy</button>
+                            <input type="text" value="https://cado.com/mauro-5" id="adminShareUrl" readonly>
+                            <button type="button" class="btn-copy" data-open-share><i class="fa-regular fa-copy"></i> Share options</button>
                         </div>
 
                         <div class="admin-social-share">
-                            <button class="share-btn whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
-                            <button class="share-btn facebook"><i class="fa-brands fa-facebook-f"></i> Facebook</button>
-                            <button class="share-btn email"><i class="fa-regular fa-envelope"></i> Email</button>
-                            <button class="share-btn qrcode"><i class="fa-solid fa-qrcode"></i> QR Code</button>
+                            <button type="button" class="share-btn whatsapp" data-open-share="whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                            <button type="button" class="share-btn email" data-open-share="email"><i class="fa-regular fa-envelope"></i> Email</button>
+                            <button type="button" class="share-btn messages" data-open-share="sms"><i class="fa-regular fa-message"></i> Messages</button>
+                            <button type="button" class="share-btn qrcode" data-open-share="qr"><i class="fa-solid fa-qrcode"></i> QR & printable invite</button>
                         </div>
                     </div>
 
@@ -238,7 +238,7 @@
                         <a href="index.html">Home</a>
                         <a href="index.html#about">About us</a>
                         <a href="create-celebration.html">Create Celebration</a>
-                        <a href="index.html#faq">FAQ</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="index.html#testimonials">Testimonials</a>
                         <a href="index.html#blog">Blog</a>
                         <a href="index.html#newsletter">Newsletter</a>
@@ -262,9 +262,9 @@
                 <div class="footer-divider"></div>
 
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#">Terms of Use and Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="terms-of-use-and-service.html">Terms of Use and Service</a>
                 </div>
 
             </div>
@@ -279,7 +279,8 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="vendor/qrcode.bundle.js"></script>
+    <script src="script.js?v=20260805-2"></script>
     <script>
         // Script Inline específico para a lógica simples do Admin
 
@@ -322,18 +323,18 @@
                 <p>Invite your friends and family to join the celebration!</p>
             </div>
             <div class="share-options-grid">
-                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn whatsapp">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn facebook">
                     <i class="fa-brands fa-facebook-f"></i> Facebook
                 </a>
                 <a href="#" class="share-option-btn instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/mauro-5&text=Come%20celebrate%20with%20us!"
                     target="_blank" class="share-option-btn twitter">
                     <i class="fa-brands fa-x-twitter"></i> Twitter
                 </a>
@@ -341,7 +342,7 @@
             <div class="copy-link-area">
                 <label>Celebration Link</label>
                 <div class="copy-input-group">
-                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <input type="text" value="https://cado.com/mauro-5" id="shareUrl" readonly>
                     <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
                 </div>
             </div>
@@ -351,3 +352,4 @@
 </body>
 
 </html>
+

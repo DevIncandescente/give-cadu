@@ -13,10 +13,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260805-2">
 </head>
 
-<body>
+<body class="statement-page">
 
     <section class="banner-container internal-mode">
 
@@ -30,7 +30,7 @@
 
         <nav class="mobile-nav-drawer">
             <a href="index.html">Home</a>
-            <a href="admin.html">Edit Celebration</a>
+            <a href="create-celebration.html">Edit Celebration</a>
             <a href="guestlist.html">Guest List</a>
             <a href="messages.html">Messages</a>
             <a href="#" id="shareBtnMobile">Share Celebration</a>
@@ -61,7 +61,7 @@
         <nav class="banner-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="admin.html">Edit Celebration</a></li>
+                <li><a href="create-celebration.html">Edit Celebration</a></li>
                 <li><a href="guestlist.html">Guest List</a></li>
                 <li><a href="messages.html">Messages</a></li>
                 <li><a href="#" id="shareBtn">Share Celebration</a></li>
@@ -83,21 +83,21 @@
                     <div class="stat-item">
                         <i class="fa-solid fa-piggy-bank" style="color: var(--primary-orange);"></i>
                         <div>
-                            <strong style="font-size: 24px; color: var(--dark-grey);">$1,250</strong>
+                            <strong style="font-size: 24px; color: var(--dark-grey);">£1,250</strong>
                             <p style="margin: 0; color: #666;">Total Received</p>
                         </div>
                     </div>
                     <div class="stat-item">
                         <i class="fa-solid fa-money-bill-trend-up" style="color: #2E7D32;"></i>
                         <div>
-                            <strong style="font-size: 24px; color: #2E7D32;">$850</strong>
+                            <strong style="font-size: 24px; color: #2E7D32;">£850</strong>
                             <p style="margin: 0; color: #666;">Available for Transfer</p>
                         </div>
                     </div>
                     <div class="stat-item">
                         <i class="fa-solid fa-hourglass-half" style="color: #E65100;"></i>
                         <div>
-                            <strong style="font-size: 24px; color: #E65100;">$400</strong>
+                            <strong style="font-size: 24px; color: #E65100;">£400</strong>
                             <p style="margin: 0; color: #666;">Pending Processing</p>
                         </div>
                     </div>
@@ -114,12 +114,17 @@
             <div class="guest-list-actions">
                 <div class="search-filter-box">
                     <input type="text" class="modal-input" placeholder="Search by givers name..." id="searchStatement">
+                    <select class="modal-input" id="statementStatusFilter" aria-label="Filter by status">
+                        <option value="all">All statuses</option>
+                        <option value="processed">Processed</option>
+                        <option value="pending">Pending</option>
+                    </select>
                 </div>
                 <div style="display: flex; gap: 10px;">
-                    <button class="btn-cta-secondary" onclick="exportStatement()">
+                    <button class="btn-cta" onclick="exportStatement()">
                         <i class="fa-solid fa-file-invoice-dollar"></i> Export Statement
                     </button>
-                    <button class="btn-cta" onclick="window.location.href='admin.html'">
+                    <button class="btn-cta-secondary" onclick="window.location.href='admin.html'">
                         <i class="fa-solid fa-arrow-left"></i> Back to Panel
                     </button>
                 </div>
@@ -139,64 +144,64 @@
                     </thead>
                     <tbody id="statementTableBody">
                         <tr>
-                            <td>Sept 21, 2026</td>
-                            <td>
+                            <td data-label="Date">Sept 21, 2026</td>
+                            <td data-label="Contributor">
                                 <div class="guest-name-cell">
                                     <i class="fa-solid fa-user-circle"></i>
                                     <strong>Maria Silva</strong>
                                 </div>
                             </td>
-                            <td>A magical family trip</td>
-                            <td><span class="status-badge confirmed">Processed</span></td>
-                            <td class="contribution-cell">$50.00</td>
-                            <td>
+                            <td data-label="Gift">A magical family trip</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Processed</span></td>
+                            <td data-label="Amount" class="contribution-cell">£50.00</td>
+                            <td data-label="Actions">
                                 <button class="btn-icon" title="View Receipt"><i
                                         class="fa-solid fa-receipt"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td>Sept 21, 2026</td>
-                            <td>
+                            <td data-label="Date">Sept 21, 2026</td>
+                            <td data-label="Contributor">
                                 <div class="guest-name-cell">
                                     <i class="fa-solid fa-user-circle"></i>
                                     <strong>João Santos</strong>
                                 </div>
                             </td>
-                            <td>Learning through play</td>
-                            <td><span class="status-badge confirmed">Processed</span></td>
-                            <td class="contribution-cell">$75.00</td>
-                            <td>
+                            <td data-label="Gift">Learning through play</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Processed</span></td>
+                            <td data-label="Amount" class="contribution-cell">£75.00</td>
+                            <td data-label="Actions">
                                 <button class="btn-icon" title="View Receipt"><i
                                         class="fa-solid fa-receipt"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td>Sept 22, 2026</td>
-                            <td>
+                            <td data-label="Date">Sept 22, 2026</td>
+                            <td data-label="Contributor">
                                 <div class="guest-name-cell">
                                     <i class="fa-solid fa-user-circle"></i>
                                     <strong>Pedro Oliveira</strong>
                                 </div>
                             </td>
-                            <td>A future dream</td>
-                            <td><span class="status-badge pending">Pending</span></td>
-                            <td class="contribution-cell">$100.00</td>
-                            <td>
+                            <td data-label="Gift">A future dream</td>
+                            <td data-label="Status"><span class="status-badge pending">Pending</span></td>
+                            <td data-label="Amount" class="contribution-cell">£100.00</td>
+                            <td data-label="Actions">
                                 <button class="btn-icon" title="View Details"><i class="fa-solid fa-eye"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td>Sept 20, 2026</td>
-                            <td>
+                            <td data-label="Date">Sept 20, 2026</td>
+                            <td data-label="Contributor">
                                 <div class="guest-name-cell">
                                     <i class="fa-solid fa-user-circle"></i>
                                     <strong>Ana Beatriz</strong>
                                 </div>
                             </td>
-                            <td>A future dream</td>
-                            <td><span class="status-badge confirmed">Processed</span></td>
-                            <td class="contribution-cell">$250.00</td>
-                            <td>
+                            <td data-label="Gift">A future dream</td>
+                            <td data-label="Status"><span class="status-badge confirmed">Processed</span></td>
+                            <td data-label="Amount" class="contribution-cell">£250.00</td>
+                            <td data-label="Actions">
                                 <button class="btn-icon" title="View Receipt"><i
                                         class="fa-solid fa-receipt"></i></button>
                             </td>
@@ -222,7 +227,7 @@
                         <a href="index.html">Home</a>
                         <a href="index.html#about">About us</a>
                         <a href="create-celebration.html">Create Celebration</a>
-                        <a href="index.html#faq">FAQ</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="index.html#testimonials">Testimonials</a>
                         <a href="index.html#blog">Blog</a>
                         <a href="index.html#newsletter">Newsletter</a>
@@ -246,9 +251,9 @@
                 <div class="footer-divider"></div>
 
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#">Terms of Use and Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="terms-of-use-and-service.html">Terms of Use and Service</a>
                 </div>
 
             </div>
@@ -263,24 +268,26 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="vendor/qrcode.bundle.js"></script>
+    <script src="script.js?v=20260805-2"></script>
     <script>
-        // Search functionality
-        document.getElementById('searchStatement').addEventListener('input', function (e) {
-            const searchTerm = e.target.value.toLowerCase();
+        function filterStatementRows() {
+            const searchTerm = document.getElementById('searchStatement').value.trim().toLowerCase();
+            const selectedStatus = document.getElementById('statementStatusFilter').value;
             const rows = document.querySelectorAll('#statementTableBody tr');
 
             rows.forEach(row => {
                 const name = row.querySelector('.guest-name-cell strong').textContent.toLowerCase();
                 const gift = row.querySelectorAll('td')[2].textContent.toLowerCase();
-
-                if (name.includes(searchTerm) || gift.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
+                const status = row.querySelector('.status-badge').textContent.trim().toLowerCase();
+                const matchesSearch = !searchTerm || name.includes(searchTerm) || gift.includes(searchTerm);
+                const matchesStatus = selectedStatus === 'all' || status === selectedStatus;
+                row.style.display = matchesSearch && matchesStatus ? '' : 'none';
             });
-        });
+        }
+
+        document.getElementById('searchStatement').addEventListener('input', filterStatementRows);
+        document.getElementById('statementStatusFilter').addEventListener('change', filterStatementRows);
 
         // Export Statement
         function exportStatement() {
@@ -306,6 +313,7 @@
             a.href = url;
             a.download = 'gift-statement.csv';
             a.click();
+            window.URL.revokeObjectURL(url);
         }
     </script>
 
@@ -318,18 +326,18 @@
                 <p>Invite your friends and family to join the celebration!</p>
             </div>
             <div class="share-options-grid">
-                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
+                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn whatsapp">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/mauro-5"
                     target="_blank" class="share-option-btn facebook">
                     <i class="fa-brands fa-facebook-f"></i> Facebook
                 </a>
                 <a href="#" class="share-option-btn instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
+                <a href="https://twitter.com/intent/tweet?url=https://cado.com/mauro-5&text=Come%20celebrate%20with%20us!"
                     target="_blank" class="share-option-btn twitter">
                     <i class="fa-brands fa-x-twitter"></i> Twitter
                 </a>
@@ -337,7 +345,7 @@
             <div class="copy-link-area">
                 <label>Celebration Link</label>
                 <div class="copy-input-group">
-                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
+                    <input type="text" value="https://cado.com/mauro-5" id="shareUrl" readonly>
                     <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
                 </div>
             </div>
@@ -347,3 +355,4 @@
 </body>
 
 </html>
+

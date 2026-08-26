@@ -16,6 +16,263 @@ function toggleSearch() {
     }
 }
 
+async function copyCadoText(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+    } catch (error) {
+        const helper = document.createElement('textarea');
+        helper.value = text;
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+    }
+}
+
+function initializeHostShareModal(shareModal) {
+    const shareBox = shareModal.querySelector('.share-modal-box');
+    const shareHeader = shareBox?.querySelector('.modal-header');
+    const shareGrid = shareBox?.querySelector('.share-options-grid');
+    const copyLinkArea = shareBox?.querySelector('.copy-link-area');
+    const shortCelebrationUrl = 'https://cado.com/mauro-5';
+    const defaultShareMessage = "Hi! We'd love you to join us for Mauro's celebration.\n\nYou can see the details, RSVP and be part of the gift here:";
+
+    if (!shareBox || !shareHeader || !shareGrid || !copyLinkArea) return;
+
+    if (!document.getElementById('shareMessage')) {
+        shareHeader.insertAdjacentHTML('afterend', `
+            <div class="share-compose-field">
+                <label for="shareMessage">Message</label>
+                <textarea id="shareMessage" class="modal-input" rows="4">${defaultShareMessage}</textarea>
+                <small>Edit the message before choosing where to share it.</small>
+            </div>
+        `);
+    }
+
+    shareGrid.innerHTML = `
+        <button type="button" class="share-option-btn whatsapp" data-share-channel="whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+        <button type="button" class="share-option-btn email" data-share-channel="email"><i class="fa-regular fa-envelope"></i> Email</button>
+        <button type="button" class="share-option-btn messages" data-share-channel="sms"><i class="fa-regular fa-message"></i> Messages</button>
+        <button type="button" class="share-option-btn copy" data-share-channel="copy"><i class="fa-regular fa-copy"></i> Copy message</button>
+    `;
+
+    const shareUrlInput = document.getElementById('shareUrl');
+    const copyBtn = document.getElementById('copyBtn');
+    if (shareUrlInput) shareUrlInput.value = shortCelebrationUrl;
+
+    if (!document.getElementById('shareQrCanvas')) {
+        copyLinkArea.insertAdjacentHTML('afterend', `
+            <section class="share-qr-panel" aria-labelledby="shareQrHeading">
+                <div class="share-qr-copy">
+                    <span class="share-panel-kicker">Printable invitation</span>
+                    <h3 id="shareQrHeading">QR code and invite</h3>
+                    <p>Choose a simple style, then download the QR code or a ready-to-print invitation.</p>
+                    <label for="inviteTheme">Invitation style</label>
+                    <select id="inviteTheme" class="modal-input">
+                        <option value="playful">Playful</option>
+                        <option value="classic">Classic</option>
+                        <option value="minimal">Minimal</option>
+                    </select>
+                    <div class="share-download-actions">
+                        <button type="button" class="btn-cta-secondary" id="downloadQrBtn"><i class="fa-solid fa-qrcode"></i> Download QR</button>
+                        <button type="button" class="btn-cta-secondary" id="downloadInviteBtn"><i class="fa-regular fa-image"></i> Download invite</button>
+                        <button type="button" class="btn-cta" id="printInviteBtn"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+                    </div>
+                </div>
+                <div class="share-preview-stack">
+                    <canvas id="shareQrCanvas" width="180" height="180" aria-label="Celebration QR code"></canvas>
+                    <canvas id="invitePreviewCanvas" width="900" height="1200" aria-label="Printable invitation preview"></canvas>
+                </div>
+            </section>
+            <p class="share-feedback" id="shareFeedback" role="status" aria-live="polite"></p>
+        `);
+    }
+
+    const shareMessageInput = document.getElementById('shareMessage');
+    const shareQrCanvas = document.getElementById('shareQrCanvas');
+    const invitePreviewCanvas = document.getElementById('invitePreviewCanvas');
+    const inviteTheme = document.getElementById('inviteTheme');
+    const shareFeedback = document.getElementById('shareFeedback');
+
+    function setShareFeedback(message) {
+        if (shareFeedback) shareFeedback.textContent = message;
+    }
+
+    function getFullShareMessage() {
+        const message = shareMessageInput?.value.trim() || defaultShareMessage;
+        return `${message}\n${shortCelebrationUrl}`;
+    }
+
+    function drawWrappedText(context, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(/\s+/);
+        const lines = [];
+        let line = '';
+        words.forEach(word => {
+            const testLine = line ? `${line} ${word}` : word;
+            if (context.measureText(testLine).width > maxWidth && line) {
+                lines.push(line);
+                line = word;
+            } else {
+                line = testLine;
+            }
+        });
+        if (line) lines.push(line);
+        lines.forEach((content, index) => context.fillText(content, x, y + index * lineHeight));
+    }
+
+    function fillRoundedRect(context, x, y, width, height, radius) {
+        context.beginPath();
+        context.moveTo(x + radius, y);
+        context.lineTo(x + width - radius, y);
+        context.quadraticCurveTo(x + width, y, x + width, y + radius);
+        context.lineTo(x + width, y + height - radius);
+        context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        context.lineTo(x + radius, y + height);
+        context.quadraticCurveTo(x, y + height, x, y + height - radius);
+        context.lineTo(x, y + radius);
+        context.quadraticCurveTo(x, y, x + radius, y);
+        context.closePath();
+        context.fill();
+    }
+
+    function renderInvitePreview() {
+        if (!invitePreviewCanvas || !shareQrCanvas) return;
+        const context = invitePreviewCanvas.getContext('2d');
+        const theme = inviteTheme?.value || 'playful';
+        const themes = {
+            playful: { background: '#FFF4E7', primary: '#E36A4B', accent: '#F7B43E', text: '#3A3A3A' },
+            classic: { background: '#FFFDF9', primary: '#B86A55', accent: '#D9B879', text: '#34302D' },
+            minimal: { background: '#FFFFFF', primary: '#3A3A3A', accent: '#E36A4B', text: '#3A3A3A' }
+        };
+        const palette = themes[theme];
+        context.clearRect(0, 0, invitePreviewCanvas.width, invitePreviewCanvas.height);
+        context.fillStyle = palette.background;
+        context.fillRect(0, 0, invitePreviewCanvas.width, invitePreviewCanvas.height);
+
+        if (theme === 'playful') {
+            context.fillStyle = 'rgba(247, 180, 62, 0.25)';
+            [[90, 95, 58], [810, 160, 42], [110, 1070, 36], [790, 1050, 64]].forEach(([x, y, radius]) => {
+                context.beginPath();
+                context.arc(x, y, radius, 0, Math.PI * 2);
+                context.fill();
+            });
+        }
+
+        context.textAlign = 'center';
+        context.fillStyle = palette.primary;
+        context.font = '700 28px Nunito, sans-serif';
+        context.fillText("YOU'RE INVITED TO", 450, 150);
+        context.fillStyle = palette.text;
+        context.font = '700 72px Nunito, sans-serif';
+        drawWrappedText(context, "Mauro's 5th Birthday", 450, 250, 720, 82);
+        context.fillStyle = palette.accent;
+        context.fillRect(380, 430, 140, 8);
+        context.fillStyle = palette.text;
+        context.font = '500 30px Rubik, sans-serif';
+        context.fillText('September 23, 2026 · 4:00 PM', 450, 510);
+        context.font = '400 25px Rubik, sans-serif';
+        drawWrappedText(context, 'Kids Buffet · 22 Berkeley Square · London W1J 6EF', 450, 565, 680, 38);
+        context.fillStyle = theme === 'minimal' ? '#F7F7F7' : '#FFFFFF';
+        fillRoundedRect(context, 250, 680, 400, 390, 28);
+        context.drawImage(shareQrCanvas, 330, 720, 240, 240);
+        context.fillStyle = palette.text;
+        context.font = '500 22px Rubik, sans-serif';
+        context.fillText('Scan to view details and RSVP', 450, 1010);
+        context.fillStyle = palette.primary;
+        context.font = '700 22px Nunito, sans-serif';
+        context.fillText('cado.com/mauro-5', 450, 1050);
+        context.fillStyle = '#8A817A';
+        context.font = '500 18px Rubik, sans-serif';
+        context.fillText('Made with Cado', 450, 1145);
+    }
+
+    async function renderShareAssets() {
+        if (!shareQrCanvas || !window.CadoQRCode?.toCanvas) {
+            setShareFeedback('QR generator is unavailable. The share link can still be copied.');
+            return;
+        }
+        await window.CadoQRCode.toCanvas(shareQrCanvas, shortCelebrationUrl, {
+            width: 180,
+            margin: 1,
+            color: { dark: '#3A3A3A', light: '#FFFFFF' }
+        });
+        renderInvitePreview();
+        setShareFeedback('QR code and printable invitation are ready.');
+    }
+
+    function downloadCanvas(canvas, filename) {
+        if (!canvas) return;
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    function openShareModal(preferredPanel = '') {
+        shareModal.classList.add('active');
+        renderShareAssets();
+        if (preferredPanel === 'qr') {
+            setTimeout(() => document.querySelector('.share-qr-panel')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+        } else {
+            setTimeout(() => shareMessageInput?.focus(), 80);
+        }
+    }
+
+    document.querySelectorAll('#shareBtn, #shareBtnMobile, [data-open-share]').forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            openShareModal(button.dataset.openShare || '');
+        });
+    });
+
+    document.querySelector('.close-share-modal')?.addEventListener('click', () => shareModal.classList.remove('active'));
+    window.addEventListener('click', event => {
+        if (event.target === shareModal) shareModal.classList.remove('active');
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+        await copyCadoText(shortCelebrationUrl);
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
+    });
+
+    shareGrid.addEventListener('click', async event => {
+        const button = event.target.closest('[data-share-channel]');
+        if (!button) return;
+        const channel = button.dataset.shareChannel;
+        const fullMessage = getFullShareMessage();
+        if (channel === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(fullMessage)}`, '_blank', 'noopener');
+        if (channel === 'email') window.location.href = `mailto:?subject=${encodeURIComponent("You're invited to Mauro's celebration")}&body=${encodeURIComponent(fullMessage)}`;
+        if (channel === 'sms') {
+            const separator = /iPhone|iPad|iPod/i.test(navigator.userAgent) ? '&' : '?';
+            window.location.href = `sms:${separator}body=${encodeURIComponent(fullMessage)}`;
+        }
+        if (channel === 'copy') {
+            await copyCadoText(fullMessage);
+            setShareFeedback('Message and link copied.');
+        }
+    });
+
+    inviteTheme?.addEventListener('change', renderInvitePreview);
+    document.getElementById('downloadQrBtn')?.addEventListener('click', () => downloadCanvas(shareQrCanvas, 'cado-mauro-5-qr.png'));
+    document.getElementById('downloadInviteBtn')?.addEventListener('click', () => downloadCanvas(invitePreviewCanvas, `cado-mauro-5-${inviteTheme?.value || 'playful'}.png`));
+    document.getElementById('printInviteBtn')?.addEventListener('click', () => {
+        if (!invitePreviewCanvas) return;
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) {
+            setShareFeedback('Allow pop-ups to print or save the invitation as PDF.');
+            return;
+        }
+        printWindow.opener = null;
+        const imageUrl = invitePreviewCanvas.toDataURL('image/png');
+        printWindow.document.write(`<html><head><title>Cado invitation</title><style>html,body{margin:0;background:#fff}img{display:block;width:min(100%,210mm);margin:auto}@page{size:A4;margin:0}</style></head><body><img src="${imageUrl}" onload="window.print()"></body></html>`);
+        printWindow.document.close();
+    });
+}
+
 // INICIALIZAÇÃO GERAL (AGUARDA O HTML CARREGAR)
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -132,79 +389,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (giftGridEl) {
 
-        // --- GIFT DATABASE ---
-        const giftCatalog = {
+        // --- CURATED GIFT LIBRARY: 7 categories x 5 ideas per celebration type ---
+        const giftCategoryConfig = {
             baby: [
-                { id: 'b1',  cat: 'experiences', emoji: '📸', name: 'Newborn Photoshoot',   price: 'from $80' },
-                { id: 'b2',  cat: 'experiences', emoji: '🛁', name: 'Baby Spa Day',         price: 'from $50' },
-                { id: 'b3',  cat: 'experiences', emoji: '🏊', name: 'First Swim Class',     price: 'from $40' },
-                { id: 'b4',  cat: 'experiences', emoji: '💆', name: 'Mommy Massage',        price: 'from $60' },
-                { id: 'b5',  cat: 'experiences', emoji: '🎠', name: 'Baby Fair Day',        price: 'from $30' },
-                { id: 'b6',  cat: 'learning',    emoji: '📖', name: 'Baby Sign Language',   price: 'from $45' },
-                { id: 'b7',  cat: 'learning',    emoji: '🎵', name: 'Music & Rhythm Class', price: 'from $35' },
-                { id: 'b8',  cat: 'learning',    emoji: '👶', name: 'Parenting Workshop',   price: 'from $50' },
-                { id: 'b9',  cat: 'learning',    emoji: '😴', name: 'Sleep Consultant',     price: 'from $80' },
-                { id: 'b10', cat: 'toys',        emoji: '🧸', name: 'Organic Stuffed Toy',  price: 'from $25' },
-                { id: 'b11', cat: 'toys',        emoji: '🎧', name: 'Sound Machine',        price: 'from $35' },
-                { id: 'b12', cat: 'toys',        emoji: '🛏️', name: 'Baby Crib Mobile',     price: 'from $30' },
-                { id: 'b13', cat: 'books',       emoji: '📚', name: 'Baby Book Bundle',     price: 'from $20' },
-                { id: 'b14', cat: 'books',       emoji: '🎨', name: 'Baby Art Journal',     price: 'from $15' },
-                { id: 'b15', cat: 'meaning',     emoji: '🏦', name: 'College Fund',         price: 'any amount' },
-                { id: 'b16', cat: 'meaning',     emoji: '🌳', name: 'Plant a Tree',         price: 'from $10' },
-                { id: 'b17', cat: 'meaning',     emoji: '💛', name: 'First Savings Account',price: 'any amount' },
-                { id: 'b18', cat: 'meaning',     emoji: '🥄', name: 'Silver Keepsake',      price: 'from $40' },
+                { id: 'essentials', label: 'Baby essentials', icon: 'fa-solid fa-baby', items: ['Baby Clothes Bundle', 'Nappies & Wipes Fund', 'Baby Bath Set', 'Feeding Essentials', 'Baby Care Kit'] },
+                { id: 'nursery', label: 'Nursery / home', icon: 'fa-solid fa-house', items: ['Cot / Crib Fund', 'Nursery Chair', 'Baby Monitor', 'Changing Table', 'Nursery Decoration'] },
+                { id: 'travel', label: 'Travel & on-the-go', icon: 'fa-solid fa-car-side', items: ['Pram / Stroller Fund', 'Car Seat Fund', 'Baby Carrier', 'Travel Cot', 'Changing Bag'] },
+                { id: 'memories', label: 'Memories', icon: 'fa-solid fa-camera-retro', items: ['Newborn Photoshoot', 'Baby Memory Book', 'Handprint / Footprint Kit', 'Personalised Blanket', 'First Year Keepsake Box'] },
+                { id: 'learning', label: 'Learning & play', icon: 'fa-solid fa-shapes', items: ['Baby Books', 'Sensory Toys', 'Play Mat', 'Music Toy Set', 'Montessori Toy Set'] },
+                { id: 'support', label: 'Parent support', icon: 'fa-solid fa-hand-holding-heart', items: ['Meal Delivery Fund', 'Postpartum Care Basket', 'Cleaning Help Fund', 'Babysitting Support', 'Mum & Baby Wellness Session'] },
+                { id: 'future', label: 'Future & meaning', icon: 'fa-solid fa-seedling', items: ['Baby Savings Fund', 'First Family Trip', 'First Birthday Fund', 'Education Fund', 'Family Memory Experience'] },
             ],
             kids: [
-                { id: 'k1',  cat: 'experiences', emoji: '🎡', name: 'Theme Park Ticket',    price: 'from $50' },
-                { id: 'k2',  cat: 'experiences', emoji: '🎬', name: 'Cinema Day',           price: 'from $20' },
-                { id: 'k3',  cat: 'experiences', emoji: '🦁', name: 'Zoo Adventure',        price: 'from $25' },
-                { id: 'k4',  cat: 'experiences', emoji: '🎳', name: 'Bowling Party',        price: 'from $30' },
-                { id: 'k5',  cat: 'experiences', emoji: '🏖️', name: 'Beach Day Trip',       price: 'from $40' },
-                { id: 'k6',  cat: 'experiences', emoji: '🧗', name: 'Rock Climbing',        price: 'from $35' },
-                { id: 'k7',  cat: 'learning',    emoji: '🎨', name: 'Art Workshop',         price: 'from $30' },
-                { id: 'k8',  cat: 'learning',    emoji: '🎹', name: 'Piano Lessons',        price: 'from $40' },
-                { id: 'k9',  cat: 'learning',    emoji: '💻', name: 'Coding Camp',          price: 'from $60' },
-                { id: 'k10', cat: 'learning',    emoji: '⚽', name: 'Soccer Coaching',      price: 'from $35' },
-                { id: 'k11', cat: 'learning',    emoji: '🥋', name: 'Karate Classes',       price: 'from $40' },
-                { id: 'k12', cat: 'toys',        emoji: '🧸', name: 'Giant Stuffed Bear',   price: 'from $30' },
-                { id: 'k13', cat: 'toys',        emoji: '🚲', name: 'Bicycle Fund',         price: 'from $80' },
-                { id: 'k14', cat: 'toys',        emoji: '🪀', name: 'Outdoor Play Set',     price: 'from $50' },
-                { id: 'k15', cat: 'toys',        emoji: '🎲', name: 'Board Game Collection',price: 'from $25' },
-                { id: 'k16', cat: 'tech',        emoji: '🎮', name: 'Gaming Console',       price: 'from $100'},
-                { id: 'k17', cat: 'tech',        emoji: '🎧', name: 'Kids Headphones',      price: 'from $30' },
-                { id: 'k18', cat: 'tech',        emoji: '📷', name: 'Kids Camera',          price: 'from $45' },
-                { id: 'k19', cat: 'books',       emoji: '📚', name: 'Book Subscription',    price: 'from $15/mo'},
-                { id: 'k20', cat: 'books',       emoji: '🗺️', name: 'World Atlas Set',      price: 'from $20' },
-                { id: 'k21', cat: 'sports',      emoji: '🏊', name: 'Swimming Lessons',     price: 'from $50' },
-                { id: 'k22', cat: 'sports',      emoji: '🤸', name: 'Gymnastics Class',     price: 'from $45' },
-                { id: 'k23', cat: 'sports',      emoji: '🎾', name: 'Tennis Lessons',       price: 'from $40' },
-                { id: 'k24', cat: 'meaning',     emoji: '🌟', name: 'Future Savings',       price: 'any amount'},
-                { id: 'k25', cat: 'meaning',     emoji: '🌳', name: 'Adopt a Tree',         price: 'from $10' },
-                { id: 'k26', cat: 'meaning',     emoji: '🐾', name: 'Sponsor an Animal',    price: 'from $15' },
+                { id: 'experiences', label: 'Experiences', icon: 'fa-solid fa-ticket', items: ['Theme Park Adventure', 'Zoo Adventure', 'Cinema Day', 'Aquarium Visit', 'Soft Play / Trampoline Park'] },
+                { id: 'learning', label: 'Learning', icon: 'fa-solid fa-graduation-cap', items: ['Music Lessons', 'Swimming Lessons', 'Dance Classes', 'Language Classes', 'Science / Coding Club'] },
+                { id: 'toys', label: 'Toys & fun', icon: 'fa-solid fa-puzzle-piece', items: ['LEGO / Building Set', 'Dollhouse / Play Kitchen', 'Outdoor Play Set', 'Board Game Collection', 'Giant Stuffed Toy'] },
+                { id: 'sports', label: 'Sports & movement', icon: 'fa-solid fa-person-running', items: ['Bicycle Fund', 'Football Classes', 'Gymnastics Classes', 'Scooter / Helmet Set', 'Tennis Lessons'] },
+                { id: 'books', label: 'Books & creativity', icon: 'fa-solid fa-palette', items: ['Book Subscription', 'Art Supplies Set', 'Craft Box Subscription', 'Personalised Story Book', 'Painting / Pottery Class'] },
+                { id: 'tech', label: 'Tech & entertainment', icon: 'fa-solid fa-gamepad', items: ['Kids Headphones', 'Kids Camera', 'Learning Apps Fund', 'Gaming Console Fund', 'Karaoke / Music Speaker'] },
+                { id: 'meaning', label: 'Meaningful gifts', icon: 'fa-solid fa-star', items: ['Future Savings', 'Bedroom Makeover', 'Big Birthday Experience', 'First Pet Fund', 'Special Family Trip'] },
             ],
             wedding: [
-                { id: 'w1',  cat: 'experiences', emoji: '🍽️', name: 'Romantic Dinner',      price: 'from $60' },
-                { id: 'w2',  cat: 'experiences', emoji: '🌴', name: 'Honeymoon Trip',       price: 'any amount'},
-                { id: 'w3',  cat: 'experiences', emoji: '💆', name: 'Couples Massage',      price: 'from $80' },
-                { id: 'w4',  cat: 'experiences', emoji: '🍷', name: 'Wine Tasting',         price: 'from $50' },
-                { id: 'w5',  cat: 'experiences', emoji: '🚢', name: 'Cruise Day',           price: 'from $120'},
-                { id: 'w6',  cat: 'experiences', emoji: '🎭', name: 'Theater Night',        price: 'from $40' },
-                { id: 'w7',  cat: 'learning',    emoji: '👨‍🍳', name: 'Cooking Class for Two',price: 'from $70' },
-                { id: 'w8',  cat: 'learning',    emoji: '💃', name: 'Dance Lessons',        price: 'from $60' },
-                { id: 'w9',  cat: 'learning',    emoji: '🏺', name: 'Pottery Workshop',     price: 'from $50' },
-                { id: 'w10', cat: 'learning',    emoji: '🌿', name: 'Garden Design Class',  price: 'from $40' },
-                { id: 'w11', cat: 'tech',        emoji: '📸', name: 'Extra Photo Album',    price: 'from $60' },
-                { id: 'w12', cat: 'tech',        emoji: '🎵', name: 'Smart Speaker',        price: 'from $50' },
-                { id: 'w13', cat: 'sports',      emoji: '🧘', name: 'Yoga Retreat',         price: 'from $80' },
-                { id: 'w14', cat: 'sports',      emoji: '🚴', name: 'Cycling Tour',         price: 'from $60' },
-                { id: 'w15', cat: 'books',       emoji: '🎨', name: 'Art for New Home',     price: 'from $50' },
-                { id: 'w16', cat: 'books',       emoji: '📖', name: 'Our Story Book',       price: 'from $35' },
-                { id: 'w17', cat: 'meaning',     emoji: '🏡', name: 'New Home Down Payment',price: 'any amount'},
-                { id: 'w18', cat: 'meaning',     emoji: '🛋️', name: 'Dream Sofa Fund',      price: 'any amount'},
-                { id: 'w19', cat: 'meaning',     emoji: '🌳', name: 'Plant a Tree Together',price: 'from $10' },
-                { id: 'w20', cat: 'meaning',     emoji: '🐾', name: 'Adopt a Pet Together', price: 'from $30' },
-            ]
+                { id: 'home', label: 'Home & life together', icon: 'fa-solid fa-house', items: ['Sofa Fund', 'Dining Table Fund', 'Bed / Mattress Fund', 'Cookware Set', 'Home Decoration Fund'] },
+                { id: 'honeymoon', label: 'Honeymoon & travel', icon: 'fa-solid fa-plane-departure', items: ['Honeymoon Fund', 'Romantic Dinner', 'Hotel Stay', 'Flight Contribution', 'Special Experience Abroad'] },
+                { id: 'experiences', label: 'Experiences together', icon: 'fa-solid fa-champagne-glasses', items: ['Couples Spa Day', 'Wine Tasting', 'Cooking Class', 'Theatre Night', 'Weekend Getaway'] },
+                { id: 'kitchen', label: 'Kitchen & hosting', icon: 'fa-solid fa-utensils', items: ['Mixer / Kitchen Appliance', 'Coffee Machine', 'Dinnerware Set', 'Wine Glass Set', 'Hosting Essentials'] },
+                { id: 'memories', label: 'Memories', icon: 'fa-solid fa-camera', items: ['Wedding Album', 'Couple Photoshoot', 'Framed Wedding Print', 'Personalised Home Sign', 'Memory Box'] },
+                { id: 'future', label: 'Future plans', icon: 'fa-solid fa-compass', items: ['New Home Fund', 'Renovation Fund', 'Garden Makeover', 'Pet Fund', 'Future Family Fund'] },
+                { id: 'meaning', label: 'Meaningful contributions', icon: 'fa-solid fa-heart', items: ['Charity Donation', 'Tree Planting Gift', 'Experience Jar', 'Date Night Fund', 'Dream Together Fund'] },
+            ],
         };
+
+        const giftCatalog = Object.fromEntries(
+            Object.entries(giftCategoryConfig).map(([eventType, categories]) => [
+                eventType,
+                categories.flatMap((category, categoryIndex) => category.items.map((name, itemIndex) => ({
+                    id: `${eventType}-${categoryIndex + 1}-${itemIndex + 1}`,
+                    cat: category.id,
+                    icon: category.icon,
+                    name,
+                }))),
+            ])
+        );
 
         // --- STATE ---
         let currentEventType = 'kids';
@@ -222,7 +448,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const giftSelectedBar = document.getElementById('giftSelectedBar');
         const giftSelectedTags = document.getElementById('giftSelectedTags');
         const giftSearchInput = document.getElementById('giftSearch');
-        const categoryChips  = document.querySelectorAll('.gm-chip');
+        const giftCategoryBar = document.getElementById('giftCategoryBar');
+
+        function renderCategoryChips() {
+            if (!giftCategoryBar) return;
+            const categories = giftCategoryConfig[currentEventType] || [];
+            const options = [
+                { id: 'all', label: 'All', icon: 'fa-solid fa-border-all' },
+                ...categories,
+            ];
+            giftCategoryBar.innerHTML = '';
+            options.forEach(category => {
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = `gm-chip ${category.id === currentCategory ? 'active' : ''}`;
+                chip.dataset.cat = category.id;
+                chip.setAttribute('aria-pressed', String(category.id === currentCategory));
+                chip.innerHTML = `<i class="${category.icon}"></i><span>${category.label}</span>`;
+                chip.addEventListener('click', () => {
+                    giftCategoryBar.querySelectorAll('.gm-chip').forEach(item => {
+                        item.classList.remove('active');
+                        item.setAttribute('aria-pressed', 'false');
+                    });
+                    chip.classList.add('active');
+                    chip.setAttribute('aria-pressed', 'true');
+                    currentCategory = category.id;
+                    showAllGifts = false;
+                    renderGiftGrid();
+                });
+                giftCategoryBar.appendChild(chip);
+            });
+        }
+
+        function renderCustomGiftCategoryOptions() {
+            const categories = giftCategoryConfig[currentEventType] || [];
+            document.querySelectorAll('.custom-gift-category-select').forEach(select => {
+                select.innerHTML = categories.map(category =>
+                    `<option value="${category.id}">${category.label}</option>`
+                ).join('');
+            });
+        }
 
         // --- RENDER GIFTS ---
         function renderGiftGrid() {
@@ -250,14 +515,16 @@ document.addEventListener('DOMContentLoaded', () => {
             visible.forEach(gift => {
                 const isSelected = selectedGiftIds.includes(gift.id);
                 const isDisabled = isMax && !isSelected;
-                const card = document.createElement('div');
+                const card = document.createElement('button');
+                card.type = 'button';
                 card.className = `gm-gift-card ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}`;
                 card.dataset.id = gift.id;
+                card.disabled = isDisabled;
+                card.setAttribute('aria-pressed', String(isSelected));
                 card.innerHTML = `
                     <div class="gm-check"><i class="fa-solid fa-check"></i></div>
-                    <div class="gm-emoji">${gift.emoji}</div>
+                    <div class="gm-emoji"><i class="${gift.icon || 'fa-solid fa-gift'}"></i></div>
                     <div class="gm-gift-name">${gift.name}</div>
-                    <div class="gm-gift-price">${gift.price}</div>
                 `;
                 card.addEventListener('click', () => toggleGift(gift));
                 giftGridEl.appendChild(card);
@@ -330,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!gift) return;
                 const tag = document.createElement('span');
                 tag.className = 'gm-tag';
-                tag.innerHTML = `${gift.emoji} ${gift.name} <span class="gm-tag-remove" data-id="${gift.id}">✕</span>`;
+                tag.innerHTML = `<i class="${gift.icon || 'fa-solid fa-gift'}"></i> ${gift.name} <span class="gm-tag-remove" data-id="${gift.id}">✕</span>`;
                 tag.querySelector('.gm-tag-remove').addEventListener('click', () => {
                     selectedGiftIds = selectedGiftIds.filter(i => i !== id);
                     updateCounter();
@@ -340,17 +607,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 giftSelectedTags.appendChild(tag);
             });
         }
-
-        // --- CATEGORY CHIPS ---
-        categoryChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                categoryChips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                currentCategory = chip.dataset.cat;
-                showAllGifts = false;
-                renderGiftGrid();
-            });
-        });
 
         // --- SEARCH ---
         if (giftSearchInput) {
@@ -366,23 +622,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const eventNameInput  = document.getElementById('event-name-input');
         const fieldsSingle    = document.getElementById('fields-single');
         const fieldsCouple    = document.getElementById('fields-couple');
+        const childAgeField   = document.getElementById('childAgeField');
 
         eventTypeRadios.forEach(radio => {
             radio.addEventListener('change', (e) => {
                 currentEventType = e.target.value;
+                currentCategory = 'all';
                 selectedGiftIds = [];
                 showAllGifts = false;
                 updateCounter();
+                renderCategoryChips();
+                renderCustomGiftCategoryOptions();
                 renderGiftGrid();
                 renderSelectedTags();
 
                 if (currentEventType === 'wedding') {
                     if (fieldsSingle) fieldsSingle.style.display = 'none';
                     if (fieldsCouple) fieldsCouple.style.display = 'grid';
+                    if (childAgeField) childAgeField.style.display = 'none';
                     if (eventNameInput) eventNameInput.placeholder = "E.g., Sarah & Mike's Wedding";
                 } else {
                     if (fieldsSingle) fieldsSingle.style.display = 'grid';
                     if (fieldsCouple) fieldsCouple.style.display = 'none';
+                    if (childAgeField) childAgeField.style.display = currentEventType === 'kids' ? '' : 'none';
                     if (eventNameInput) {
                         eventNameInput.placeholder = currentEventType === 'baby'
                             ? "E.g., Julie's Baby Shower"
@@ -408,6 +670,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // --- INIT ---
+        renderCategoryChips();
+        renderCustomGiftCategoryOptions();
         renderGiftGrid();
     }
 
@@ -568,7 +832,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Formulários de Pagamento
         const allForms = {
             'card': document.getElementById('cardForm'),
-            'pix': document.getElementById('pixForm'),
+            'google': document.getElementById('googleForm'),
             'apple': document.getElementById('appleForm')
         };
 
@@ -590,11 +854,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentGiftTitle = document.getElementById('modalGiftTitle').innerText;
 
                 payGiftName.innerText = currentGiftTitle;
-                payTotalAmount.innerText = `$${amount}`;
+                payTotalAmount.innerText = `£${amount}`;
 
                 // Atualiza o valor nos botões de pagamento (todos eles)
                 amountDisplays.forEach(display => {
-                    display.innerText = `$${amount}`;
+                    display.innerText = `£${amount}`;
                 });
 
                 // C. Abre o Modal de Pagamento
@@ -616,7 +880,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        /* --- Lógica das Abas de Pagamento (Card, Pix, Apple Pay) --- */
+        /* --- Lógica das Abas de Pagamento (Card, Google Pay, Apple Pay) --- */
         payTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 // 1. Visual da Aba
@@ -628,7 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (form) form.style.display = 'none';
                 });
 
-                const method = tab.getAttribute('data-method'); // 'card', 'pix' ou 'apple'
+                const method = tab.getAttribute('data-method');
                 if (allForms[method]) {
                     allForms[method].style.display = 'block';
                 }
@@ -663,80 +927,167 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnApplePay) {
             btnApplePay.addEventListener('click', processPaymentAndRedirect);
         }
+
+        const btnGooglePay = document.querySelector('.btn-google-pay');
+        if (btnGooglePay) {
+            btnGooglePay.addEventListener('click', processPaymentAndRedirect);
+        }
     }
 
     /* ==========================================================================
        9. MODAL: SHARE CELEBRATION
        ========================================================================== */
     const shareModal = document.getElementById('shareModal');
-    const shareBtns = document.querySelectorAll('#shareBtn, #shareBtnMobile');
-    const closeShareBtn = document.querySelector('.close-share-modal');
-    const copyBtn = document.getElementById('copyBtn');
-    const shareUrlInput = document.getElementById('shareUrl');
-
-    if (shareModal) {
-        // 1. Abrir Modal
-        shareBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                shareModal.classList.add('active');
-            });
-        });
-
-        // 2. Botão no rodapé das páginas públicas
-        const footerShareBtn = document.querySelector('.btn-share-action');
-        if (footerShareBtn) {
-            footerShareBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                shareModal.classList.add('active');
-            });
-        }
-
-        // 3. Fechar Modal
-        if (closeShareBtn) {
-            closeShareBtn.addEventListener('click', () => {
-                shareModal.classList.remove('active');
-            });
-        }
-
-        // Fechar ao clicar fora
-        window.addEventListener('click', (e) => {
-            if (e.target === shareModal) {
-                shareModal.classList.remove('active');
-            }
-        });
-
-        // 4. Lógica de Copiar Link
-        if (copyBtn && shareUrlInput) {
-            copyBtn.addEventListener('click', () => {
-                shareUrlInput.select();
-                shareUrlInput.setSelectionRange(0, 99999); // Para dispositivos móveis
-                navigator.clipboard.writeText(shareUrlInput.value).then(() => {
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                    copyBtn.style.backgroundColor = '#27AE60';
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                        copyBtn.style.backgroundColor = '';
-                    }, 2000);
-                });
-            });
-        }
+    if (shareModal && !document.body.classList.contains('guest-landing-page')) {
+        initializeHostShareModal(shareModal);
     }
+
+    const openMapsLink = document.getElementById('openMapsLink');
+    if (openMapsLink) {
+        const address = openMapsLink.dataset.address || openMapsLink.textContent.trim();
+        const isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
+        openMapsLink.href = isAppleDevice
+            ? `https://maps.apple.com/?q=${encodeURIComponent(address)}`
+            : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    }
+
+    document.querySelectorAll('.message-card[data-email]').forEach(card => {
+        if (card.querySelector('.btn-thank-you')) return;
+        const guestName = card.querySelector('.guest-msg-name')?.textContent.trim() || 'there';
+        const email = card.dataset.email;
+        const subject = "Thank you for being part of Mauro's celebration";
+        const body = `Hi ${guestName},\n\nThank you for celebrating with us. Your message and support made the day even more meaningful.\n\nWith love,\nMauro's family`;
+        const button = document.createElement('a');
+        button.className = 'btn-thank-you';
+        button.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        button.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Send thank-you';
+        card.appendChild(button);
+    });
+
     /* ==========================================================================
        10. LIVE PREVIEW: CREATOR'S CANVAS
        ========================================================================== */
     const eventNameInput = document.getElementById('event-name-input');
     const eventDescInput = document.getElementById('event-desc-input');
     const bannerInput = document.getElementById('bannerInput');
+    const bannerUploadLabel = document.getElementById('bannerUploadLabel');
     const previewName = document.getElementById('previewDisplayName');
     const previewDesc = document.getElementById('previewDisplayDesc');
-    const previewBanner = document.getElementById('previewBanner');
+    const previewPhoto = document.getElementById('previewPhoto');
+    const previewAgeStat = document.getElementById('previewAgeStat');
+    const previewTheme = document.getElementById('previewDisplayTheme');
+    const eventDateInput = document.getElementById('event-date-input');
+    const eventTimeInput = document.getElementById('event-time-input');
+    const eventPostcodeInput = document.getElementById('event-postcode-input');
+    const eventAddressInput = document.getElementById('event-address-input');
+    const previewDateStat = document.getElementById('previewDateStat');
+    const previewDisplayDate = document.getElementById('previewDisplayDate');
+    const previewLocationStat = document.getElementById('previewLocationStat');
+    const previewDisplayLocation = document.getElementById('previewDisplayLocation');
+    const partnerOneInput = document.getElementById('partner-one-input');
+    const partnerTwoInput = document.getElementById('partner-two-input');
+    const coupleGoalInput = document.getElementById('couple-goal-input');
+    const previewPlaceholders = {
+        baby: { image: 'img/card-1.png', name: 'A beautiful new beginning', theme: 'Baby celebration' },
+        kids: { image: 'img/card-2.png', name: "Mauro's Party", theme: 'Celebration theme' },
+        wedding: { image: 'img/card-3.png', name: 'Together, always', theme: 'Our next adventure' },
+    };
+    const localAddressSuggestions = {
+        'W1J 6EF': 'Kids Buffet, 22 Berkeley Square, London W1J 6EF',
+        'SW7 2AP': 'Science Museum, Exhibition Road, London SW7 2AP',
+        'SE1 2AA': 'Tower Bridge, Tower Bridge Road, London SE1 2AA',
+        'M1 1AE': 'Northern Quarter, Manchester M1 1AE',
+        'B1 1BB': 'Centenary Square, Birmingham B1 1BB'
+    };
+
+    function updateEventLogisticsPreview() {
+        if (previewDisplayDate && previewDateStat) {
+            const dateValue = eventDateInput?.value;
+            const timeValue = eventTimeInput?.value;
+            if (dateValue) {
+                const [year, month, day] = dateValue.split('-').map(Number);
+                const formattedDate = new Intl.DateTimeFormat('en-GB', {
+                    day: 'numeric', month: 'short', year: 'numeric'
+                }).format(new Date(year, month - 1, day));
+                previewDisplayDate.textContent = timeValue ? `${formattedDate} at ${timeValue}` : formattedDate;
+                previewDateStat.hidden = false;
+            } else {
+                previewDisplayDate.textContent = '';
+                previewDateStat.hidden = true;
+            }
+        }
+
+        if (previewDisplayLocation && previewLocationStat) {
+            const location = eventAddressInput?.value.trim() || eventPostcodeInput?.value.trim();
+            previewDisplayLocation.textContent = location;
+            previewLocationStat.hidden = !location;
+        }
+    }
+
+    eventDateInput?.addEventListener('input', updateEventLogisticsPreview);
+    eventTimeInput?.addEventListener('input', updateEventLogisticsPreview);
+    eventAddressInput?.addEventListener('input', () => {
+        const matchingPostcode = Object.entries(localAddressSuggestions)
+            .find(([, address]) => address === eventAddressInput.value)?.[0];
+        if (matchingPostcode && eventPostcodeInput) eventPostcodeInput.value = matchingPostcode;
+        updateEventLogisticsPreview();
+    });
+    eventPostcodeInput?.addEventListener('input', () => {
+        const normalizedPostcode = eventPostcodeInput.value.trim().toUpperCase();
+        const matchingAddress = localAddressSuggestions[normalizedPostcode];
+        if (matchingAddress && eventAddressInput) eventAddressInput.value = matchingAddress;
+        updateEventLogisticsPreview();
+    });
+
+    function getSelectedEventType() {
+        return document.querySelector('input[name="event_type"]:checked')?.value || 'kids';
+    }
+
+    function updateCouplePreview() {
+        if (getSelectedEventType() !== 'wedding' || !previewName) return;
+        if (eventNameInput?.value.trim()) {
+            previewName.textContent = eventNameInput.value.trim();
+            return;
+        }
+        const firstName = partnerOneInput?.value.trim();
+        const secondName = partnerTwoInput?.value.trim();
+        previewName.textContent = firstName || secondName
+            ? [firstName, secondName].filter(Boolean).join(' & ')
+            : previewPlaceholders.wedding.name;
+    }
+
+    function updatePreviewForEventType(eventType) {
+        const config = previewPlaceholders[eventType] || previewPlaceholders.kids;
+        if (previewPhoto && previewPhoto.dataset.hasUpload !== 'true') {
+            previewPhoto.style.backgroundImage = `url('${config.image}')`;
+        }
+        if (previewPhoto) {
+            previewPhoto.classList.remove('preview-type-baby', 'preview-type-kids', 'preview-type-wedding');
+            previewPhoto.classList.add(`preview-type-${eventType}`);
+        }
+        if (previewAgeStat) {
+            const ageInput = document.querySelector('[data-target="preview-age"]');
+            previewAgeStat.hidden = eventType !== 'kids' || !ageInput?.value;
+        }
+        if (previewName && !eventNameInput?.value) {
+            previewName.textContent = config.name;
+        }
+        if (previewTheme) {
+            previewTheme.textContent = eventType === 'wedding'
+                ? (coupleGoalInput?.value || config.theme)
+                : (document.querySelector('[data-target="preview-theme"]')?.value || config.theme);
+        }
+        if (eventType === 'wedding') updateCouplePreview();
+    }
 
     // Sync Text Inputs
     if (eventNameInput && previewName) {
         eventNameInput.addEventListener('input', () => {
-            previewName.textContent = eventNameInput.value || "Mauro's Party";
+            if (getSelectedEventType() === 'wedding' && !eventNameInput.value) {
+                updateCouplePreview();
+            } else {
+                previewName.textContent = eventNameInput.value || previewPlaceholders[getSelectedEventType()].name;
+            }
         });
     }
 
@@ -756,40 +1107,172 @@ document.addEventListener('DOMContentLoaded', () => {
             const displayEl = document.getElementById('previewDisplay' + capitalized);
 
             if (displayEl) {
-                displayEl.textContent = input.value || (targetId === 'preview-age' ? '5' : 'Dinosaur Theme');
+                if (targetId === 'preview-age') {
+                    displayEl.textContent = input.value;
+                    if (previewAgeStat) previewAgeStat.hidden = getSelectedEventType() !== 'kids' || !input.value;
+                } else {
+                    displayEl.textContent = input.value || previewPlaceholders[getSelectedEventType()].theme;
+                }
             }
         });
+    });
+
+    [partnerOneInput, partnerTwoInput].forEach(input => input?.addEventListener('input', updateCouplePreview));
+    coupleGoalInput?.addEventListener('input', () => {
+        if (previewTheme && getSelectedEventType() === 'wedding') {
+            previewTheme.textContent = coupleGoalInput.value || previewPlaceholders.wedding.theme;
+        }
     });
 
     // Image Upload Preview Trigger
     const uploadBox = document.getElementById('bannerUploadBox');
     if (uploadBox && bannerInput) {
-        uploadBox.addEventListener('click', () => bannerInput.click());
-    }
-
-    if (bannerInput && previewBanner) {
-        bannerInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    previewBanner.style.backgroundImage = `url(${e.target.result})`;
-                    previewBanner.querySelector('.preview-overlay').style.background = 'rgba(0,0,0,0.5)';
-                };
-                reader.readAsDataURL(file);
-            }
+        uploadBox.addEventListener('click', () => {
+            bannerInput.value = '';
+            bannerInput.click();
         });
     }
+
+    if (bannerInput && previewPhoto) {
+        let activePreviewObjectUrl = '';
+
+        bannerInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            if (file.type && !file.type.startsWith('image/')) {
+                this.value = '';
+                if (bannerUploadLabel) bannerUploadLabel.textContent = 'Choose an image file';
+                return;
+            }
+
+            const maxUploadBytes = 15 * 1024 * 1024;
+            if (file.size > maxUploadBytes) {
+                this.value = '';
+                if (bannerUploadLabel) bannerUploadLabel.textContent = 'Maximum file size is 15 MB';
+                return;
+            }
+
+            if (bannerUploadLabel) bannerUploadLabel.textContent = 'Optimising image...';
+            const sourceUrl = URL.createObjectURL(file);
+            const image = new Image();
+
+            image.onload = () => {
+                const maxDimension = 1920;
+                const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+                canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+                const context = canvas.getContext('2d');
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                canvas.toBlob(compressedBlob => {
+                    URL.revokeObjectURL(sourceUrl);
+                    const previewBlob = compressedBlob || file;
+                    if (activePreviewObjectUrl) URL.revokeObjectURL(activePreviewObjectUrl);
+                    activePreviewObjectUrl = URL.createObjectURL(previewBlob);
+                    previewPhoto.style.backgroundImage = `url("${activePreviewObjectUrl}")`;
+                    previewPhoto.dataset.hasUpload = 'true';
+                    if (bannerUploadLabel) {
+                        const originalMegabytes = file.size / (1024 * 1024);
+                        const finalMegabytes = previewBlob.size / (1024 * 1024);
+                        bannerUploadLabel.textContent = `${file.name.length > 16 ? `${file.name.slice(0, 13)}...` : file.name} (${originalMegabytes.toFixed(1)} → ${finalMegabytes.toFixed(1)} MB)`;
+                    }
+                }, 'image/webp', 0.82);
+            };
+            image.onerror = () => {
+                URL.revokeObjectURL(sourceUrl);
+                this.value = '';
+                if (bannerUploadLabel) bannerUploadLabel.textContent = 'Try another image';
+            };
+            image.src = sourceUrl;
+        });
+    }
+
+    document.querySelectorAll('.image-position-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.image-position-btn').forEach(item => item.classList.remove('active'));
+            button.classList.add('active');
+            if (previewPhoto) previewPhoto.style.backgroundPosition = button.dataset.position;
+        });
+    });
 
     // Handle Category/Type Selection
     document.querySelectorAll('input[name="event_type"]').forEach(radio => {
         radio.addEventListener('change', () => {
-            const label = radio.getAttribute('data-label');
-            if (previewName && !eventNameInput.value) {
-                previewName.textContent = `New ${label}`;
-            }
+            updatePreviewForEventType(radio.value);
         });
     });
+
+    if (previewPhoto) updatePreviewForEventType(getSelectedEventType());
+
+    const creationSteps = [...document.querySelectorAll('.creation-step')];
+    function setActiveCreationStep(stepLink) {
+        creationSteps.forEach(link => {
+            const isActive = link === stepLink;
+            link.classList.toggle('active', isActive);
+            if (isActive) link.setAttribute('aria-current', 'step');
+            else link.removeAttribute('aria-current');
+        });
+    }
+    creationSteps.forEach(stepLink => {
+        stepLink.addEventListener('click', () => setActiveCreationStep(stepLink));
+        const target = document.querySelector(stepLink.getAttribute('href'));
+        target?.addEventListener('focusin', () => setActiveCreationStep(stepLink));
+    });
+    if ('IntersectionObserver' in window) {
+        const formStepObserver = new IntersectionObserver(entries => {
+            const visibleEntry = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+            if (!visibleEntry) return;
+            const matchingStep = creationSteps.find(link => link.getAttribute('href') === `#${visibleEntry.target.id}`);
+            if (matchingStep) setActiveCreationStep(matchingStep);
+        }, { rootMargin: '-18% 0px -62% 0px', threshold: [0.05, 0.25, 0.5] });
+        document.querySelectorAll('.form-step-card[id]').forEach(section => formStepObserver.observe(section));
+    }
+    if (creationSteps[0]) setActiveCreationStep(creationSteps[0]);
+
+    const hostSetupModal = document.getElementById('hostSetupModal');
+    const hostSetupForm = document.getElementById('hostSetupForm');
+    const hostSetupSaved = document.getElementById('hostSetupSaved');
+    const openHostSetupButton = document.querySelector('.creation-form .btn-create-page');
+    const closeHostSetupButton = document.querySelector('.close-host-setup-modal');
+
+    if (hostSetupModal && hostSetupForm && openHostSetupButton) {
+        openHostSetupButton.addEventListener('click', () => {
+            hostSetupModal.classList.add('active');
+            setTimeout(() => document.getElementById('host-name-input')?.focus(), 80);
+        });
+        closeHostSetupButton?.addEventListener('click', () => hostSetupModal.classList.remove('active'));
+        window.addEventListener('click', event => {
+            if (event.target === hostSetupModal) hostSetupModal.classList.remove('active');
+        });
+
+        hostSetupForm.addEventListener('submit', event => {
+            event.preventDefault();
+            if (!hostSetupForm.reportValidity()) return;
+            const draft = {
+                hostName: document.getElementById('host-name-input')?.value.trim() || '',
+                hostEmail: document.getElementById('host-email-input')?.value.trim() || '',
+                eventType: getSelectedEventType(),
+                eventName: eventNameInput?.value.trim() || '',
+                description: eventDescInput?.value.trim() || '',
+                date: eventDateInput?.value || '',
+                time: eventTimeInput?.value || '',
+                postcode: eventPostcodeInput?.value.trim() || '',
+                address: eventAddressInput?.value.trim() || '',
+                savedAt: new Date().toISOString()
+            };
+            try {
+                localStorage.setItem('cadoCelebrationDraft', JSON.stringify(draft));
+            } catch (error) {
+                console.warn('The celebration draft could not be saved locally.', error);
+            }
+            hostSetupForm.hidden = true;
+            if (hostSetupSaved) hostSetupSaved.hidden = false;
+        });
+    }
 
     /* ==========================================================================
        11. CREATE GIFT MODAL
@@ -839,8 +1322,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function addCustomGiftToCatalog(name, category) {
             if (!name.trim()) { alert('Please enter a gift name.'); return false; }
             const customId = 'custom_' + Date.now();
-            const emoji = '🎁';
-            const newGift = { id: customId, cat: category, emoji, name: name.trim(), price: 'any amount' };
+            const icon = 'fa-solid fa-gift';
+            const newGift = { id: customId, cat: category, icon, name: name.trim() };
             // Add to all event type catalogs so it shows regardless of type
             const giftGridEl = document.getElementById('giftGrid');
             if (giftGridEl) {
@@ -858,7 +1341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const name = document.getElementById('customGiftName').value;
                 const cat = document.getElementById('customGiftCategory').value;
                 if (window._addCustomGift && name.trim()) {
-                    window._addCustomGift({ id: 'custom_' + Date.now(), cat, emoji: '🎁', name: name.trim(), price: 'any amount' });
+                    window._addCustomGift({ id: 'custom_' + Date.now(), cat, icon: 'fa-solid fa-gift', name: name.trim() });
                     document.getElementById('customGiftName').value = '';
                     createGiftModal.classList.remove('active');
                 } else {
@@ -874,7 +1357,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const name = document.getElementById('customGiftNameComplex').value;
                 const cat = document.getElementById('customGiftCategoryComplex').value;
                 if (window._addCustomGift && name.trim()) {
-                    window._addCustomGift({ id: 'custom_' + Date.now(), cat, emoji: '🎁', name: name.trim(), price: 'any amount' });
+                    window._addCustomGift({ id: 'custom_' + Date.now(), cat, icon: 'fa-solid fa-gift', name: name.trim() });
                     document.getElementById('customGiftNameComplex').value = '';
                     document.getElementById('customGiftDesc').value = '';
                     createGiftModal.classList.remove('active');

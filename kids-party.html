@@ -5,14 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mauro's Party - Cado</title>
+    <meta name="description" content="Join Mauro's celebration on September 23, 2026. View the details, RSVP and be part of a meaningful gift.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mauro's 5th Birthday - You're invited">
+    <meta property="og:description" content="View the celebration details, RSVP and be part of Mauro's gift.">
+    <meta property="og:url" content="https://cado.com/mauro-5">
+    <meta property="og:image" content="https://cado.com/img/kids-img-1.png">
+    <meta property="og:image:alt" content="Mauro celebrating with his family">
+    <meta name="twitter:card" content="summary_large_image">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Rubik:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="img/icon1.svg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260805-2">
 </head>
 
-<body>
+<body class="guest-landing-page">
 
     <section class="banner-container internal-mode">
 
@@ -31,7 +39,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="admin.html">Edit Celebration</a></li>
                 <li><a href="guestlist.html">Guest List</a></li>
-                <li><a href="#" id="shareBtn">Share Celebration</a></li>
                 <li class="cc-highlight" style="margin-left: 3px;"><a href="statement.html"><i
                             class="fa-solid fa-database "></i> Gift Statement</a></li>
             </ul>
@@ -68,14 +75,12 @@
             <div class="party-content-grid">
 
                 <div class="party-photo-box">
-                    <img src="/img/kids-img-1.png" alt="Mauro and Mom" class="party-main-img">
+                    <img src="img/kids-img-1.png" alt="Mauro celebrating with his family" class="party-main-img">
                 </div>
 
                 <div class="party-info-card">
                     <p class="party-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
+                        We would love you to celebrate Mauro's special day with us. Come for the fun, stay for the memories, and help make this a day he will always remember.
                     </p>
 
                     <div class="party-details-row">
@@ -94,6 +99,12 @@
                         <div>
                             <strong>Kids Buffet</strong><br>
                             Berkeley Gate, 22 Berkeley Square, London W1J 6EF
+                            <a class="btn-view-location" id="openMapsLink"
+                                data-address="Kids Buffet, 22 Berkeley Square, London W1J 6EF"
+                                href="https://www.google.com/maps/search/?api=1&amp;query=Kids%20Buffet%2C%2022%20Berkeley%20Square%2C%20London%20W1J%206EF"
+                                target="_blank" rel="noopener">
+                                <i class="fa-solid fa-map-location-dot"></i> Open in Maps
+                            </a>
                         </div>
                     </div>
 
@@ -125,7 +136,7 @@
 
             <div class="attendance-cta-box">
                 <div class="attendance-left">
-                    <h2>You’re part of this celebration!</h2>
+                    <h2>You're part of this celebration!</h2>
                     <div class="divider-left"></div>
                     <p>Your presence makes this moment even more meaningful.</p>
                 </div>
@@ -157,42 +168,42 @@
                         <div class="gift-img-box">
                             <img src="img/kids-cards-1.png" alt="Trip">
                         </div>
-                        <button class="btn-contribute">Contribute</button>
+                        <button class="btn-contribute">Be part of this gift</button>
                     </div>
                     <div class="gift-card-item">
                         <h3>Learning<br>through play</h3>
                         <div class="gift-img-box">
                             <img src="img/kids-cards-2.png" alt="Learning">
                         </div>
-                        <button class="btn-contribute">Contribute</button>
+                        <button class="btn-contribute">Be part of this gift</button>
                     </div>
                     <div class="gift-card-item">
                         <h3>Outdoor<br>adventures</h3>
                         <div class="gift-img-box">
                             <img src="img/kids-cards-3.png" alt="Outdoor">
                         </div>
-                        <button class="btn-contribute">Contribute</button>
+                        <button class="btn-contribute">Be part of this gift</button>
                     </div>
                     <div class="gift-card-item">
                         <h3>Books, stories<br>and imagination</h3>
                         <div class="gift-img-box">
                             <img src="img/kids-cards-4.png" alt="Books">
                         </div>
-                        <button class="btn-contribute">Contribute</button>
+                        <button class="btn-contribute">Be part of this gift</button>
                     </div>
                     <div class="gift-card-item">
                         <h3>Creative<br>play at home</h3>
                         <div class="gift-img-box">
                             <img src="img/kids-cards-5.png" alt="Creative">
                         </div>
-                        <button class="btn-contribute">Contribute</button>
+                        <button class="btn-contribute">Be part of this gift</button>
                     </div>
                     <div class="gift-card-item">
                         <h3>A future<br>dream</h3>
                         <div class="gift-img-box">
                             <img src="img/kids-cards-6.png" alt="Dream">
                         </div>
-                        <button class="btn-contribute">Contribute</button>
+                        <button class="btn-contribute">Be part of this gift</button>
                     </div>
                 </div>
             </div>
@@ -201,25 +212,6 @@
     </section>
 
     <footer class="site-footer">
-
-        <div class="share-celebration-card">
-            <div class="share-content-limiter">
-
-                <div class="share-left">
-                    <h2>Invite those who matter</h2>
-                    <div class="yellow-dash-small"></div>
-                    <p>Send the link to friends and family so everyone<br>can be part of this special moment.</p>
-                </div>
-
-                <div class="share-right">
-                    <div class="share-bkg">
-                        <img src="img/bkg-share-cta.png" alt="">
-                    </div>
-                    <button class="btn-share-action">Share Celebration</button>
-                </div>
-
-            </div>
-        </div>
 
         <div class="footer-orange-bg">
             <div class="limit-celebration footer-content-wrapper">
@@ -233,7 +225,7 @@
                         <a href="index.html">Home</a>
                         <a href="index.html#about">About us</a>
                         <a href="create-celebration.html">Create Celebration</a>
-                        <a href="index.html#faq">FAQ</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="index.html#testimonials">Testimonials</a>
                         <a href="index.html#blog">Blog</a>
                         <a href="index.html#newsletter">Newsletter</a>
@@ -257,9 +249,9 @@
                 <div class="footer-divider"></div>
 
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#">Terms of Use and Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="terms-of-use-and-service.html">Terms of Use and Service</a>
                 </div>
 
             </div>
@@ -337,22 +329,22 @@
                 </div>
                 <div class="gift-text-info">
                     <h3 id="modalGiftTitle">Gift Title</h3>
-                    <p>Your contribution helps make this dream come true. Every bit counts!</p>
+                    <p>Choose any amount that feels right for you.</p>
                 </div>
             </div>
 
             <form class="gift-form">
                 <div class="input-wrapper">
-                    <label>Amount to contribute ($)</label>
+                    <label>Amount to contribute (£)</label>
                     <div class="price-input-row">
                         <input type="number" class="modal-input price-input" placeholder="0.00">
-                        <span class="currency-tag">USD</span>
+                        <span class="currency-tag">GBP</span>
                     </div>
                 </div>
 
                 <div class="info-green-box">
                     <i class="fa-solid fa-circle-info"></i>
-                    <span>People usually contribute around <strong>$50.00</strong> for this gift.</span>
+                    <span>There is no minimum contribution.</span>
                 </div>
 
                 <div class="input-wrapper">
@@ -396,7 +388,7 @@
                 </div>
                 <div class="summary-row total">
                     <span class="summary-label">Total Contribution:</span>
-                    <span class="summary-value" id="payTotalAmount">$0.00</span>
+                    <span class="summary-value" id="payTotalAmount">£0.00</span>
                 </div>
             </div>
 
@@ -404,8 +396,8 @@
                 <button class="pay-tab active" data-method="card">
                     <i class="fa-regular fa-credit-card"></i> Card
                 </button>
-                <button class="pay-tab" data-method="pix">
-                    <i class="fa-brands fa-pix"></i> Pix
+                <button class="pay-tab" data-method="google">
+                    <i class="fa-brands fa-google"></i> Google Pay
                 </button>
                 <button class="pay-tab" data-method="apple">
                     <i class="fa-brands fa-apple"></i> Pay
@@ -441,19 +433,17 @@
                 </div>
 
                 <button type="button" class="btn-pay-now">
-                    Pay Now <span class="btnPayAmountDisplay">$0.00</span>
+                    Pay Now <span class="btnPayAmountDisplay">£0.00</span>
                 </button>
             </form>
 
-            <div id="pixForm" class="payment-form" style="display: none;">
-                <div class="pix-content">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"
-                        alt="QR Code" class="qr-code-img">
-                    <p>Scan the QR Code or copy the key below to pay.</p>
-                    <div class="copy-paste-box">
-                        <span>00020126580014BR.GOV.BCB.PIX...</span>
-                        <button><i class="fa-regular fa-copy"></i></button>
-                    </div>
+            <div id="googleForm" class="payment-form" style="display: none;">
+                <div class="wallet-pay-content">
+                    <p>Continue with your Google Pay wallet.</p>
+                    <button type="button" class="btn-google-pay">
+                        <i class="fa-brands fa-google"></i> Pay
+                    </button>
+                    <p class="apple-note">Total to pay: <strong class="btnPayAmountDisplay">£0.00</strong></p>
                 </div>
             </div>
 
@@ -466,50 +456,16 @@
                         <span class="apple-text">Pay</span>
                     </button>
 
-                    <p class="apple-note">Total to pay: <strong class="btnPayAmountDisplay">$0.00</strong></p>
+                    <p class="apple-note">Total to pay: <strong class="btnPayAmountDisplay">£0.00</strong></p>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <script src="script.js"></script>
-
-    <!-- Modal: Share Celebration -->
-    <div id="shareModal" class="modal-overlay">
-        <div class="modal-box share-modal-box">
-            <button class="close-modal-btn close-share-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <h2>Share Celebration</h2>
-                <p>Invite your friends and family to join the celebration!</p>
-            </div>
-            <div class="share-options-grid">
-                <a href="https://api.whatsapp.com/send?text=Come%20celebrate%20with%20us!%20https://cado.com/celebration/mauro-5th"
-                    target="_blank" class="share-option-btn whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://cado.com/celebration/mauro-5th"
-                    target="_blank" class="share-option-btn facebook">
-                    <i class="fa-brands fa-facebook-f"></i> Facebook
-                </a>
-                <a href="#" class="share-option-btn instagram">
-                    <i class="fa-brands fa-instagram"></i> Instagram
-                </a>
-                <a href="https://twitter.com/intent/tweet?url=https://cado.com/celebration/mauro-5th&text=Come%20celebrate%20with%20us!"
-                    target="_blank" class="share-option-btn twitter">
-                    <i class="fa-brands fa-x-twitter"></i> Twitter
-                </a>
-            </div>
-            <div class="copy-link-area">
-                <label>Celebration Link</label>
-                <div class="copy-input-group">
-                    <input type="text" value="https://cado.com/celebration/mauro-5th" id="shareUrl" readonly>
-                    <button id="copyBtn"><i class="fa-regular fa-copy"></i> Copy</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="script.js?v=20260805-2"></script>
 
 </body>
 
 </html>
+
